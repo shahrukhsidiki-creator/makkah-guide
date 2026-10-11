@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Page not found | Makkah Guide</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0a3b2c">
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/assets/favicon.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="hdr-row">
+      <a class="brand" href="/index.html">
+        <span class="mark" aria-hidden="true">🕋</span>
+        <span><b>Makkah Guide</b><small data-i18n="ui.brand_tag">Umrah &amp; travel companion</small></span>
+      </a>
+    </div>
+    <div class="page-title">
+      <h1 data-i18n="404.001">That page isn't here</h1>
+      <p data-i18n="404.002">The link may be old, or mistyped. Everything else still works.</p>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="card accent">
+    <h3 data-i18n="404.003">Where you probably wanted to go</h3>
+    <div class="grid c2" style="margin-top:12px">
+      <a class="tile" href="/index.html"><span class="ic" data-i18n="404.004">🕋</span><b data-i18n="404.005">Home</b><span data-i18n="404.006">Everything, from the top</span></a>
+      <a class="tile" href="/umrah-guide.html"><span class="ic" data-i18n="404.007">📖</span><b data-i18n="404.008">Umrah steps</b><span data-i18n="404.009">Ihram to Taqsir</span></a>
+      <a class="tile" href="/tools.html"><span class="ic" data-i18n="404.010">🧭</span><b data-i18n="404.011">Prayer &amp; Qibla</b><span data-i18n="404.012">Works offline</span></a>
+      <a class="tile" href="/travel.html"><span class="ic" data-i18n="404.013">✈️</span><b data-i18n="404.014">Travel</b><span data-i18n="404.015">Flights, trains, hotels, taxis</span></a>
+    </div>
+  </div>
+
+  <div class="card">
+    <p style="font-size:.92rem;margin-top:0" data-i18n="404.016">Looking for something specific?</p>
+    <label class="fld">
+      <span data-i18n="404.017">Search this site</span>
+      <input id="q" placeholder="e.g. Hateem timing, taxi fare, dates" data-i18n-placeholder="404.ph019">
+    </label>
+    <button class="btn" id="go" type="button"><span data-i18n="404.x001">Search</span> <span class="ext" data-i18n="404.018">↗</span></button>
+  </div>
+</main>
+
+<script src="/assets/app.js"></script>
+<script src="/assets/i18n.js"></script>
+<script>
+(function () {
+  var q = document.getElementById('q');
+  function run() {
+    var v = q.value.trim();
+    if (!v) { MG.toast('Type something first'); return; }
+    MG.google(v + ' Makkah Umrah ' + location.hostname);
+  }
+  document.getElementById('go').addEventListener('click', run);
+  q.addEventListener('keydown', function (e) { if (e.key === 'Enter') run(); });
+})();
+</script>
+
+
+</body></html>

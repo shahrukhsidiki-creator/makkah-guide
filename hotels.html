@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Hotels in Makkah — Star Ratings, Real Prices &amp; Distance from the Haram | Makkah Guide</title>
+<meta name="description" content="Where to stay in Makkah: 5-star to budget hotels compared on price per night, how much Ramadan and Hajj multiply the cost, walking distance from Masjid al-Haram by area, and what to check before you book.">
+<meta name="theme-color" content="#0a3b2c">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="hdr-row">
+      <a class="brand" href="index.html">
+        <span class="mark" aria-hidden="true">🕋</span>
+        <span><b>Makkah Guide</b><small data-i18n="ui.brand_tag">Umrah &amp; travel companion</small></span>
+      </a>
+      <div class="hdr-actions">
+        <button class="icon-btn" id="langBtn" type="button" aria-label="Change language">EN</button>
+        <button class="icon-btn" id="themeBtn" type="button" aria-label="Toggle dark mode">🌙</button>
+      </div>
+    </div>
+    <div class="page-title">
+      <a class="back-link" href="travel.html" data-i18n="hotels.001">← Travel</a>
+      <h1 data-i18n="hotels.002">Where to stay</h1>
+      <p data-i18n="hotels.003">Distance from the Haram will shape your trip more than the star rating will.</p>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="notice warn">
+    <b data-i18n="hotels.004">The one thing to understand first</b> <span data-i18n="hotels.x001">You will walk to the Haram five times a day, often in heat, often tired. A 3-star hotel eight minutes from a gate will give you a better Umrah than a 5-star hotel forty minutes away. Judge distance first, stars second.</span> </div>
+
+  <!-- ===== Distance picker ===== -->
+  <section class="section" id="areas">
+    <h2><span class="ic" data-i18n="hotels.005">📍</span> <span data-i18n="hotels.x002">Pick an area to compare</span></h2>
+    <div class="card">
+      <label class="fld">
+        <span data-i18n="hotels.006">Area or district</span>
+        <select id="area"></select>
+      </label>
+
+      <div class="result-box">
+        <div class="big" id="walkTime">—</div>
+        <div class="sub" id="walkSub" data-i18n="hotels.007">on foot to the nearest Haram gate</div>
+      </div>
+
+      <div class="kv"><span data-i18n="hotels.008">Distance to the Haram</span><b id="dist">—</b></div>
+      <div class="kv"><span data-i18n="hotels.009">Typical nightly price</span><b id="price">—</b></div>
+      <div class="kv"><span data-i18n="hotels.010">In Ramadan / Hajj</span><b id="peak">—</b></div>
+      <div class="kv"><span data-i18n="hotels.011">Usual star range</span><b id="stars">—</b></div>
+      <p class="hint" id="note" style="margin-top:10px"></p>
+
+      <div class="btn-row two" style="margin-top:12px">
+        <button class="btn sm" id="seeHotels" type="button"><span data-i18n="hotels.x003">Hotels in this area</span> <span class="ext" data-i18n="hotels.012">↗</span></button>
+        <button class="btn sm ghost" id="seeMap" type="button"><span data-i18n="hotels.x004">See it on the map</span> <span class="ext" data-i18n="hotels.013">↗</span></button>
+      </div>
+    </div>
+    <p class="hint" data-i18n="hotels.014">Walking times are for an unhurried adult and assume normal crowds. Add a good 10–20 minutes around the five prayers, when the walkways and gates are congested — and considerably more on a Friday.</p>
+  </section>
+
+  <div class="ad-slot" data-hint="Hotels near the Haram — featured placement"></div>
+
+  <!-- ===== Star categories ===== -->
+  <section class="section" id="stars-table">
+    <h2><span class="ic" data-i18n="hotels.015">⭐</span> <span data-i18n="hotels.x005">By star rating</span></h2>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th data-i18n="hotels.016">Category</th><th data-i18n="hotels.017">Normal nightly</th><th data-i18n="hotels.018">Ramadan / Hajj</th><th data-i18n="hotels.019">What you get</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><b data-i18n="hotels.020">5★ tower</b><br><span class="muted" style="font-size:.78rem" data-i18n="hotels.021">Clock Tower, Jabal Omar</span></td>
+            <td data-i18n="hotels.022">SAR 900–2,500</td><td data-i18n="hotels.023">SAR 3,000–9,000+</td>
+            <td data-i18n="hotels.024">Steps from a gate, Haram views, full service, indoor walkway in the heat</td>
+          </tr>
+          <tr>
+            <td><b data-i18n="hotels.025">4★</b></td><td data-i18n="hotels.026">SAR 400–900</td><td data-i18n="hotels.027">SAR 1,200–3,500</td>
+            <td data-i18n="hotels.028">5–15 min walk, breakfast, lift that copes, reliable air conditioning</td>
+          </tr>
+          <tr>
+            <td><b data-i18n="hotels.029">3★</b></td><td data-i18n="hotels.030">SAR 200–450</td><td data-i18n="hotels.031">SAR 700–1,800</td>
+            <td data-i18n="hotels.032">10–25 min walk or a shuttle, clean and adequate, the value sweet spot</td>
+          </tr>
+          <tr>
+            <td><b data-i18n="hotels.033">2★ / budget</b></td><td data-i18n="hotels.034">SAR 100–250</td><td data-i18n="hotels.035">SAR 400–1,000</td>
+            <td data-i18n="hotels.036">Further out or older building, basic rooms, shuttle usually needed</td>
+          </tr>
+          <tr>
+            <td><b data-i18n="hotels.037">Shared room / dorm</b></td><td data-i18n="hotels.038">SAR 40–120 per bed</td><td data-i18n="hotels.039">SAR 150–400 per bed</td>
+            <td data-i18n="hotels.040">Bed in a shared room, mostly in Aziziyah and Misfalah</td>
+          </tr>
+          <tr>
+            <td><b data-i18n="hotels.041">Apartment</b></td><td data-i18n="hotels.042">SAR 250–700</td><td data-i18n="hotels.043">SAR 800–2,500</td>
+            <td data-i18n="hotels.044">Kitchen and space — much the cheapest option for a family of five or more</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="hint" data-i18n="hotels.045">Indicative planning ranges per room per night, not quotes. Makkah pricing swings harder than almost any other city on earth — the same room can be four to six times dearer in the last ten nights of Ramadan. Always check live prices for your dates.</p>
+
+    <div class="btn-row two" style="margin-top:12px">
+      <button class="btn ghost sm" type="button" onclick="MG.go('https://www.booking.com/searchresults.html?ss=Makkah%2C%20Saudi%20Arabia')"><span data-i18n="hotels.x006">Booking.com</span> <span class="ext" data-i18n="hotels.046">↗</span></button>
+      <button class="btn ghost sm" type="button" onclick="MG.go('https://www.agoda.com/search?city=16296')"><span data-i18n="hotels.x007">Agoda</span> <span class="ext" data-i18n="hotels.047">↗</span></button>
+    </div>
+    <div class="btn-row two" style="margin-top:9px">
+      <button class="btn ghost sm" type="button" onclick="MG.go('https://www.google.com/travel/hotels/Makkah')"><span data-i18n="hotels.x008">Google Hotels</span> <span class="ext" data-i18n="hotels.048">↗</span></button>
+      <button class="btn ghost sm" type="button" onclick="MG.maps('hotels near Masjid al-Haram Makkah')"><span data-i18n="hotels.x009">On the map</span> <span class="ext" data-i18n="hotels.049">↗</span></button>
+    </div>
+  </section>
+
+  <!-- ===== Before booking ===== -->
+  <section class="section">
+    <h2><span class="ic" data-i18n="hotels.050">🔍</span> <span data-i18n="hotels.x010">Check these before you book</span></h2>
+    <div class="card">
+      <ul class="ticks">
+        <li data-i18n="hotels.m001"><b>Walking distance, not straight-line distance.</b> Booking sites measure as the crow flies. The real walk can be twice that, because you go around the complex, not through it. Check it on the map before you trust the number.</li>
+        <li data-i18n="hotels.m002"><b>Which gate you'd actually use.</b> "500m from the Haram" means little if your nearest entrance is on the far side from your room.</li>
+        <li data-i18n="hotels.m003"><b>"Haram view" costs real money.</b> It is a genuine premium, often several hundred riyal a night. Decide honestly whether you will be in the room looking out of the window, or in the mosque.</li>
+        <li data-i18n="hotels.m004"><b>Shuttle schedule, if you're further out.</b> Ask how often it runs, whether it runs through the night, and whether it still runs during Ramadan. A shuttle every two hours is not a shuttle.</li>
+        <li data-i18n="hotels.m005"><b>Is breakfast included, and when does it start?</b> Many kitchens open after Fajr, which is no use if you want to eat and return for Ishraq.</li>
+        <li data-i18n="hotels.m006"><b>Check-in and check-out times against your flight.</b> Night arrivals are the norm for Umrah; confirm the room is held and that reception is staffed around the clock.</li>
+        <li data-i18n="hotels.m007"><b>Lift capacity in a tall hotel.</b> In a 25-floor hotel at prayer time, a slow lift adds fifteen minutes to every trip. Reviews mention this when it's bad.</li>
+        <li data-i18n="hotels.m008"><b>Read reviews written during Ramadan.</b> A hotel that runs well in a quiet month can be overwhelmed in a busy one.</li>
+        <li data-i18n="hotels.m009"><b>Cancellation terms.</b> Visa and flight plans change. Free cancellation is usually worth a small premium.</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="ad-slot" data-hint="Travel agencies, apartment rentals, hotel groups"></div>
+
+  <!-- ===== Saving money ===== -->
+  <section class="section">
+    <h2><span class="ic" data-i18n="hotels.060">💰</span> <span data-i18n="hotels.x020">Spending less</span></h2>
+    <details class="acc">
+      <summary data-i18n="hotels.061">Stay further out and use the bus</summary>
+      <div class="acc-body"><p style="margin:0;font-size:.92rem" data-i18n="hotels.062">Aziziyah and Shisha cost a fraction of the tower hotels and are well connected by bus and shared taxi. If your trip is long, the saving over ten nights can be larger than your airfare. The trade-off is real though: you will make fewer trips to the Haram per day, and that is the thing you came for. Consider it for a longer stay, not a three-night one.</p></div>
+    </details>
+    <details class="acc">
+      <summary data-i18n="hotels.063">Split your stay</summary>
+      <div class="acc-body"><p style="margin:0;font-size:.92rem" data-i18n="hotels.064">A common tactic: two or three nights close to the Haram at the start, while your energy and enthusiasm are highest, then move further out for the rest. You get the intense early days near the mosque without paying tower prices for the whole trip.</p></div>
+    </details>
+    <details class="acc">
+      <summary data-i18n="hotels.065">Apartments for families</summary>
+      <div class="acc-body"><p style="margin:0;font-size:.92rem" data-i18n="hotels.066">For five or more people, a serviced apartment usually beats two hotel rooms on price and is far more comfortable. A kitchen also cuts the food bill substantially, which adds up over a week.</p></div>
+    </details>
+    <details class="acc">
+      <summary data-i18n="hotels.067">Avoid the peaks if you possibly can</summary>
+      <div class="acc-body"><p style="margin:0;font-size:.92rem" data-i18n="hotels.068">The last ten nights of Ramadan and the Hajj period are the two most expensive windows in the year, by a wide margin. The weeks immediately after Hajj, and the months between Ramadan and Hajj season, are the cheapest — often less than a third of peak rates for the same room.</p></div>
+    </details>
+    <details class="acc">
+      <summary data-i18n="hotels.069">Book refundable, then watch the price</summary>
+      <div class="acc-body"><p style="margin:0;font-size:.92rem" data-i18n="hotels.070">Makkah rates move a great deal as dates approach. Book something refundable early so you have a room secured, then check again periodically — if it drops, rebook and cancel the first. Just diarise the cancellation deadline.</p></div>
+    </details>
+  </section>
+
+  <!-- ===== Madinah ===== -->
+  <section class="section">
+    <h2><span class="ic" data-i18n="hotels.071">🕌</span> <span data-i18n="hotels.x021">Madinah, briefly</span></h2>
+    <div class="card">
+      <p style="font-size:.93rem;margin-top:0" data-i18n="hotels.072">Madinah is easier and generally cheaper. The area around the Prophet's Mosque is flatter, more compact and far more walkable than Makkah, so a wider spread of hotels sits within a genuine 5–10 minute walk.</p>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th data-i18n="hotels.073">Category</th><th data-i18n="hotels.074">Normal nightly</th><th data-i18n="hotels.075">Ramadan / Hajj</th></tr></thead>
+          <tbody>
+            <tr><td data-i18n="hotels.076">5★ facing the mosque</td><td data-i18n="hotels.077">SAR 600–1,500</td><td data-i18n="hotels.078">SAR 2,000–5,000</td></tr>
+            <tr><td data-i18n="hotels.079">4★</td><td data-i18n="hotels.080">SAR 300–600</td><td data-i18n="hotels.081">SAR 900–2,000</td></tr>
+            <tr><td data-i18n="hotels.082">3★ / budget</td><td data-i18n="hotels.083">SAR 120–300</td><td data-i18n="hotels.084">SAR 400–1,000</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="hint" data-i18n="hotels.085">The central area is ringed by hotels on all sides. Picking one near the gate closest to the Rawdah entrance saves time if you have a permit slot.</p>
+      <div class="btn-row two" style="margin-top:10px">
+        <button class="btn ghost sm" type="button" onclick="MG.go('https://www.booking.com/searchresults.html?ss=Madinah%2C%20Saudi%20Arabia')"><span data-i18n="hotels.x022">Madinah hotels</span> <span class="ext" data-i18n="hotels.086">↗</span></button>
+        <button class="btn ghost sm" type="button" onclick="MG.maps('hotels near Al-Masjid an-Nabawi Madinah')"><span data-i18n="hotels.x023">On the map</span> <span class="ext" data-i18n="hotels.087">↗</span></button>
+      </div>
+    </div>
+  </section>
+
+  <div class="disclaimer" data-i18n="hotels.088">
+    Prices are indicative planning ranges collected for guidance, not quotes, and they move constantly with season and demand. This site sells nothing, takes no bookings, and has no commercial relationship with any hotel or booking platform mentioned. Distances and walking times are approximate. Always confirm live prices, distance and terms with the provider before booking.
+  </div>
+
+</main>
+
+<script src="assets/app.js"></script>
+<script src="assets/i18n.js"></script>
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+
+  // name, walk minutes, distance, normal price, peak price, stars, note, map query
+  var AREAS = [
+    ['Abraj Al Bait / Clock Tower', 3, '100–300 m', 'SAR 900–2,500', 'SAR 3,000–9,000+', '4★–5★',
+     'As close as it is possible to stay. Connected to the Haram by covered walkways, which matters enormously in summer. You pay for every one of those metres.',
+     'Abraj Al Bait Clock Tower hotels Makkah'],
+    ['Jabal Omar', 6, '300–700 m', 'SAR 700–2,000', 'SAR 2,500–7,000', '4★–5★',
+     'The large modern development on the west side. Excellent hotels and a short covered walk, though the complex itself is big — check which tower you are in.',
+     'Jabal Omar hotels Makkah'],
+    ['Ajyad', 8, '400–900 m', 'SAR 300–800', 'SAR 1,000–3,000', '3★–4★',
+     'Just south of the Haram and a long-standing favourite. Good balance of price and walking distance, plenty of restaurants on the doorstep.',
+     'Ajyad Makkah hotels'],
+    ['Misfalah', 12, '800 m–1.5 km', 'SAR 180–450', 'SAR 600–1,800', '2★–3★',
+     'Dense, busy, cheap, and full of South Asian and Arab food. Popular with budget pilgrims. Still walkable, but it is a real walk in the heat.',
+     'Misfalah Makkah hotels'],
+    ['Shisha / Jabal Ka\'bah', 18, '1.2–2 km', 'SAR 150–400', 'SAR 500–1,500', '2★–3★',
+     'North-east of the Haram. Noticeably cheaper. Many hotels run a shuttle — confirm the frequency before booking.',
+     'Shisha district Makkah hotels'],
+    ['Kudai', 15, '1–1.8 km', 'SAR 150–400', 'SAR 500–1,500', '2★–3★',
+     'South of the Haram, near the dates market and the big bus terminal. Convenient for transport and shopping, decent value.',
+     'Kudai Makkah hotels'],
+    ['Aziziyah', 0, '4–8 km', 'SAR 100–280', 'SAR 350–900', '2★–3★',
+     'Not walkable — you will rely on the bus, a shuttle or taxis. Much the cheapest area, with apartments and shared rooms, and a lot of pilgrim groups stay here. Sensible for a long trip, frustrating for a short one.',
+     'Aziziyah Makkah hotels'],
+    ['Rusaifah (near the train station)', 0, '5–7 km', 'SAR 120–350', 'SAR 400–1,100', '2★–4★',
+     'Handy if you are arriving or leaving by the Haramain train, but you will need transport to the Haram for every prayer.',
+     'Rusaifah Makkah hotels']
+  ];
+
+  $('area').innerHTML = AREAS.map(function (a, i) {
+    return '<option value="' + i + '">' + a[0] + '</option>';
+  }).join('');
+
+  function render() {
+    var a = AREAS[+$('area').value];
+    if (a[1] === 0) {
+      $('walkTime').textContent = 'Not walkable';
+      $('walkSub').textContent = 'you will need the bus, a shuttle or a taxi';
+    } else {
+      $('walkTime').textContent = '~' + a[1] + ' min';
+      $('walkSub').textContent = 'on foot to the nearest Haram gate';
+    }
+    $('dist').textContent = a[2];
+    $('price').textContent = a[3];
+    $('peak').textContent = a[4];
+    $('stars').textContent = a[5];
+    $('note').textContent = a[6];
+    $('seeHotels').onclick = function () {
+      MG.go('https://www.booking.com/searchresults.html?ss=' + MG.q(a[0] + ', Makkah, Saudi Arabia'));
+    };
+    $('seeMap').onclick = function () { MG.maps(a[7]); };
+  }
+
+  $('area').addEventListener('change', function () { MG.set('hotelArea', this.value); render(); });
+  var saved = MG.get('hotelArea', null);
+  if (saved !== null && AREAS[+saved]) $('area').value = saved;
+  render();
+})();
+</script>
+
+
+</body></html>

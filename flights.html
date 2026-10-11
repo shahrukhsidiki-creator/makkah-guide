@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Cheap Flights to Jeddah &amp; Madinah — Compare in One Tap | Makkah Guide</title>
+<meta name="description" content="Search cheap flights to Jeddah, Madinah, Taif or Riyadh from any city. One form sends the same search to Google Flights, Skyscanner, Kayak, Momondo and Trip.com so you can compare prices for your Umrah trip.">
+<meta name="theme-color" content="#0a3b2c">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="hdr-row">
+      <a class="brand" href="index.html">
+        <span class="mark" aria-hidden="true">🕋</span>
+        <span><b>Makkah Guide</b><small data-i18n="ui.brand_tag">Umrah &amp; travel companion</small></span>
+      </a>
+      <div class="hdr-actions">
+        <button class="icon-btn" id="langBtn" type="button" aria-label="Change language">EN</button>
+        <button class="icon-btn" id="themeBtn" type="button" aria-label="Toggle dark mode">🌙</button>
+      </div>
+    </div>
+    <div class="page-title">
+      <a class="back-link" href="travel.html" data-i18n="flights.001">← Travel</a>
+      <h1 data-i18n="flights.002">Find cheap flights</h1>
+      <p data-i18n="flights.003">Fill it in once. Fire the same search at five sites and compare.</p>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="card">
+    <div class="chips" style="margin-top:0">
+      <button class="chip on" id="tripRound" type="button" data-i18n="flights.004">Return</button>
+      <button class="chip" id="tripOne" type="button" data-i18n="flights.005">One way</button>
+    </div>
+
+    <label class="fld">
+      <span data-i18n="flights.006">Flying from</span>
+      <input id="from" list="airports" placeholder="City or airport code — e.g. Karachi or KHI" autocomplete="off" data-i18n-placeholder="flights.ph046">
+    </label>
+
+    <label class="fld">
+      <span data-i18n="flights.007">Flying to</span>
+      <input id="to" list="airports" value="JED — Jeddah, King Abdulaziz (for Makkah)" autocomplete="off">
+    </label>
+    <div class="chips" style="margin-top:-4px">
+      <button class="chip" type="button" data-dest="JED — Jeddah, King Abdulaziz (for Makkah)" data-i18n="flights.008">Jeddah (Makkah)</button>
+      <button class="chip" type="button" data-dest="MED — Madinah, Prince Mohammad bin Abdulaziz" data-i18n="flights.009">Madinah</button>
+      <button class="chip" type="button" data-dest="TIF — Taif International" data-i18n="flights.010">Taif</button>
+      <button class="chip" type="button" data-dest="RUH — Riyadh, King Khalid" data-i18n="flights.011">Riyadh</button>
+    </div>
+
+    <div class="fld-2" style="margin-top:12px">
+      <label class="fld"><span data-i18n="flights.012">Departing</span><input type="date" id="dep"></label>
+      <label class="fld" id="retWrap"><span data-i18n="flights.013">Returning</span><input type="date" id="ret"></label>
+    </div>
+
+    <div class="fld-2">
+      <label class="fld">
+        <span data-i18n="flights.014">Travellers</span>
+        <select id="pax">
+          <option>1</option><option selected="">2</option><option>3</option><option>4</option>
+          <option>5</option><option>6</option><option>7</option><option>8</option><option>9</option>
+        </select>
+      </label>
+      <label class="fld">
+        <span data-i18n="flights.015">Cabin</span>
+        <select id="cabin">
+          <option value="e" data-i18n="flights.016">Economy</option>
+          <option value="p" data-i18n="flights.017">Premium economy</option>
+          <option value="b" data-i18n="flights.018">Business</option>
+        </select>
+      </label>
+    </div>
+
+    <div id="resolved" class="notice info" style="margin:4px 0 12px;display:none"></div>
+
+    <div class="btn-row">
+      <button class="btn" id="goGoogle" type="button"><span data-i18n="flights.x001">Search Google Flights</span> <span class="ext" data-i18n="flights.019">↗</span></button>
+    </div>
+    <div class="btn-row two" style="margin-top:9px">
+      <button class="btn ghost" id="goSky" type="button"><span data-i18n="flights.x002">Skyscanner</span> <span class="ext" data-i18n="flights.020">↗</span></button>
+      <button class="btn ghost" id="goKayak" type="button"><span data-i18n="flights.x003">Kayak</span> <span class="ext" data-i18n="flights.021">↗</span></button>
+    </div>
+    <div class="btn-row two" style="margin-top:9px">
+      <button class="btn ghost" id="goMomondo" type="button"><span data-i18n="flights.x004">Momondo</span> <span class="ext" data-i18n="flights.022">↗</span></button>
+      <button class="btn ghost" id="goTrip" type="button"><span data-i18n="flights.x005">Trip.com</span> <span class="ext" data-i18n="flights.023">↗</span></button>
+    </div>
+    <div class="btn-row" style="margin-top:9px">
+      <button class="btn ghost" id="goAll" type="button" data-i18n="flights.024">🔥 Open all five and compare</button>
+    </div>
+    <p class="hint" data-i18n="flights.025">Every search opens in a new tab with your details already filled in. Your browser may ask permission the first time you open several at once.</p>
+  </div>
+
+  <datalist id="airports"></datalist>
+
+  <div class="ad-slot" data-hint="Airline offers, travel agency, Umrah package deals"></div>
+
+  <section class="section">
+    <h2><span class="ic" data-i18n="flights.026">💡</span> <span data-i18n="flights.x006">Getting the price down</span></h2>
+
+    <details class="acc">
+      <summary data-i18n="flights.027">Jeddah vs Madinah — which airport?</summary>
+      <div class="acc-body">
+        <p style="margin:0 0 8px;font-size:.92rem" data-i18n="flights.m001"><b>Jeddah (JED)</b> is the usual Umrah gateway: roughly 1 to 1.5 hours by road to Makkah, far more flights, and generally cheaper fares.</p>
+        <p style="margin:0 0 8px;font-size:.92rem" data-i18n="flights.m002"><b>Madinah (MED)</b> is worth checking if you intend to visit Madinah anyway. Fly into Madinah, do your ziyarat, enter Ihram at Dhul Hulayfah, then take the Haramain train down to Makkah and fly home from Jeddah.</p>
+        <p style="margin:0;font-size:.92rem" data-i18n="flights.030">An open-jaw booking (into MED, out of JED) is often barely more expensive than a return and saves you a whole backtrack. Google Flights handles multi-city well.</p>
+      </div>
+    </details>
+
+    <details class="acc">
+      <summary data-i18n="flights.031">When fares are cheapest</summary>
+      <div class="acc-body">
+        <ul class="ticks" style="margin:0">
+          <li data-i18n="flights.032">Avoid Ramadan — especially the last ten nights — and the Hajj period. Prices can multiply several times over.</li>
+          <li data-i18n="flights.033">The quietest, cheapest windows are typically the weeks right after Hajj, and the months between Ramadan and Hajj season.</li>
+          <li data-i18n="flights.034">Midweek departures beat weekends almost everywhere.</li>
+          <li data-i18n="flights.035">Booking roughly 2 to 4 months ahead usually lands better than last-minute, though Umrah routes behave less predictably than leisure routes.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="acc">
+      <summary data-i18n="flights.036">Package vs booking it yourself</summary>
+      <div class="acc-body">
+        <p style="margin:0 0 8px;font-size:.92rem" data-i18n="flights.037">Agency Umrah packages bundle visa, flights, hotel and transfers. They are convenient, and for first-timers or elderly travellers that convenience is worth real money.</p>
+        <p style="margin:0;font-size:.92rem" data-i18n="flights.038">But price the parts separately before you commit. Now that Saudi tourist e-visas permit Umrah for many nationalities, booking flights and a hotel yourself is frequently cheaper — sometimes substantially — and gives you control over hotel distance from the Haram, which matters more than almost anything else on the trip.</p>
+      </div>
+    </details>
+
+    <details class="acc">
+      <summary data-i18n="flights.039">Baggage — the hidden cost</summary>
+      <div class="acc-body">
+        <p style="margin:0;font-size:.92rem" data-i18n="flights.040">A headline fare with no checked bag is not cheap once you add a bag each way, and Umrah travellers almost always come home heavier — Zamzam, dates, gifts, prayer mats. Compare the <em>total including baggage</em>, not the lead price. Note that Zamzam is normally handled separately from your baggage allowance; check your airline's current rule before you buy a container.</p>
+      </div>
+    </details>
+  </section>
+
+  <div class="card accent">
+    <h3 data-i18n="flights.041">🏨 Also worth comparing</h3>
+    <p style="font-size:.9rem;margin-bottom:12px" data-i18n="flights.042">Hotel distance from the Haram will shape your whole trip more than the fare will. Walking ten minutes five times a day in the heat is very different from walking forty.</p>
+    <div class="btn-row two">
+      <a class="btn sm ghost" href="hotels.html" data-i18n="flights.043">Compare hotels</a>
+      <button class="btn sm ghost" type="button" onclick="MG.maps('hotels near Masjid al-Haram Makkah')"><span data-i18n="flights.x009">See them on a map</span> <span class="ext" data-i18n="flights.044">↗</span></button>
+    </div>
+  </div>
+
+  <div class="disclaimer" data-i18n="flights.045">
+    This page does not sell flights, hold prices, or process bookings. It builds a search link and hands you to the airline or comparison site, where all prices, terms and payments are theirs. We have no affiliation with any of them.
+  </div>
+
+</main>
+
+<script src="assets/app.js"></script>
+<script src="assets/i18n.js"></script>
+<script>
+(function () {
+  var AIRPORTS = [
+    ['JED','Jeddah, King Abdulaziz (for Makkah)'],['MED','Madinah, Prince Mohammad bin Abdulaziz'],
+    ['RUH','Riyadh, King Khalid'],['TIF','Taif International'],['DMM','Dammam, King Fahd'],['YNB','Yanbu'],
+    ['DXB','Dubai International'],['DWC','Dubai Al Maktoum'],['SHJ','Sharjah'],['AUH','Abu Dhabi'],
+    ['RKT','Ras Al Khaimah'],['DOH','Doha'],['KWI','Kuwait'],['BAH','Bahrain'],['MCT','Muscat'],['SLL','Salalah'],
+    ['KHI','Karachi'],['LHE','Lahore'],['ISB','Islamabad'],['PEW','Peshawar'],['MUX','Multan'],
+    ['SKT','Sialkot'],['FSD','Faisalabad'],['UET','Quetta'],
+    ['DEL','Delhi'],['BOM','Mumbai'],['HYD','Hyderabad, India'],['BLR','Bengaluru'],['MAA','Chennai'],
+    ['CCU','Kolkata'],['COK','Kochi'],['CCJ','Kozhikode'],['TRV','Thiruvananthapuram'],['LKO','Lucknow'],
+    ['AMD','Ahmedabad'],['SXR','Srinagar'],['GAU','Guwahati'],['PNQ','Pune'],['JAI','Jaipur'],
+    ['DAC','Dhaka'],['CGP','Chattogram'],['ZYL','Sylhet'],['CMB','Colombo'],['KTM','Kathmandu'],['MLE','Maldives'],
+    ['CAI','Cairo'],['HRG','Hurghada'],['ALY','Alexandria'],['KRT','Khartoum'],['ADD','Addis Ababa'],
+    ['NBO','Nairobi'],['DAR','Dar es Salaam'],['MBA','Mombasa'],['LOS','Lagos'],['ABV','Abuja'],['KAN','Kano'],
+    ['ACC','Accra'],['CMN','Casablanca'],['RAK','Marrakesh'],['TUN','Tunis'],['ALG','Algiers'],['TIP','Tripoli'],
+    ['AMM','Amman'],['BEY','Beirut'],['DAM','Damascus'],['BGW','Baghdad'],['BSR','Basra'],['NJF','Najaf'],['EBL','Erbil'],
+    ['IST','Istanbul'],['SAW','Istanbul Sabiha Gokcen'],['ESB','Ankara'],['AYT','Antalya'],['ADA','Adana'],
+    ['THR','Tehran'],['KBL','Kabul'],['TAS','Tashkent'],['ALA','Almaty'],['BAK','Baku'],
+    ['CGK','Jakarta'],['SUB','Surabaya'],['UPG','Makassar'],['MES','Medan'],['BTJ','Banda Aceh'],
+    ['KUL','Kuala Lumpur'],['PEN','Penang'],['BKI','Kota Kinabalu'],['SIN','Singapore'],['BKK','Bangkok'],
+    ['MNL','Manila'],['HKG','Hong Kong'],['PVG','Shanghai'],['PEK','Beijing'],['URC','Urumqi'],
+    ['NRT','Tokyo Narita'],['ICN','Seoul Incheon'],
+    ['LHR','London Heathrow'],['LGW','London Gatwick'],['STN','London Stansted'],['LTN','London Luton'],
+    ['MAN','Manchester'],['BHX','Birmingham'],['LBA','Leeds Bradford'],['GLA','Glasgow'],['EDI','Edinburgh'],
+    ['NCL','Newcastle'],['BRS','Bristol'],['DUB','Dublin'],
+    ['CDG','Paris Charles de Gaulle'],['ORY','Paris Orly'],['AMS','Amsterdam'],['BRU','Brussels'],
+    ['FRA','Frankfurt'],['MUC','Munich'],['DUS','Dusseldorf'],['BER','Berlin'],['HAM','Hamburg'],['STR','Stuttgart'],
+    ['VIE','Vienna'],['ZRH','Zurich'],['GVA','Geneva'],['MXP','Milan Malpensa'],['FCO','Rome Fiumicino'],
+    ['BCN','Barcelona'],['MAD','Madrid'],['LIS','Lisbon'],['ARN','Stockholm'],['OSL','Oslo'],['CPH','Copenhagen'],
+    ['HEL','Helsinki'],['WAW','Warsaw'],['ATH','Athens'],['SOF','Sofia'],['SVO','Moscow Sheremetyevo'],
+    ['JFK','New York JFK'],['EWR','Newark'],['IAD','Washington Dulles'],['ORD','Chicago O\'Hare'],
+    ['ATL','Atlanta'],['DFW','Dallas Fort Worth'],['IAH','Houston'],['LAX','Los Angeles'],['SFO','San Francisco'],
+    ['DTW','Detroit'],['BOS','Boston'],['MCO','Orlando'],['MIA','Miami'],['SEA','Seattle'],['PHL','Philadelphia'],
+    ['YYZ','Toronto'],['YUL','Montreal'],['YVR','Vancouver'],['YYC','Calgary'],['YEG','Edmonton'],
+    ['SYD','Sydney'],['MEL','Melbourne'],['PER','Perth'],['BNE','Brisbane'],['AKL','Auckland'],
+    ['JNB','Johannesburg'],['CPT','Cape Town'],['DUR','Durban']
+  ];
+
+  var dl = document.getElementById('airports');
+  dl.innerHTML = AIRPORTS.map(function (a) {
+    return '<option value="' + a[0] + ' — ' + a[1] + '"></option>';
+  }).join('');
+
+  var $ = function (id) { return document.getElementById(id); };
+  var roundTrip = true;
+
+  /* Resolve free text to a real IATA code, or return null.
+     Returning a guess here was the old bug: "Karachi, Pakistan" became
+     "KAR", which is not an airport, so the search arrived empty. */
+  function code(v) {
+    v = (v || '').trim();
+    if (!v) return null;
+    var lower = v.toLowerCase();
+
+    // "KHI — Karachi" or a bare 3-letter code
+    var m = v.match(/^([A-Za-z]{3})(\s*[—\-–]|\s*$)/);
+    if (m) {
+      var c = m[1].toUpperCase();
+      for (var a = 0; a < AIRPORTS.length; a++) if (AIRPORTS[a][0] === c) return c;
+    }
+    // exact city name
+    for (var i = 0; i < AIRPORTS.length; i++) {
+      if (AIRPORTS[i][1].toLowerCase() === lower) return AIRPORTS[i][0];
+    }
+    // city name at the start — "karachi" matches "Karachi"
+    for (var j = 0; j < AIRPORTS.length; j++) {
+      if (AIRPORTS[j][1].toLowerCase().indexOf(lower) === 0 && lower.length >= 3) return AIRPORTS[j][0];
+    }
+    // anywhere in the name — "heathrow", "king abdulaziz"
+    var hits = [];
+    for (var k = 0; k < AIRPORTS.length; k++) {
+      if (AIRPORTS[k][1].toLowerCase().indexOf(lower) !== -1 && lower.length >= 3) hits.push(AIRPORTS[k][0]);
+    }
+    if (hits.length === 1) return hits[0];
+    // "Karachi, Pakistan" / "Karachi airport" — try the first word
+    var first = lower.split(/[,(]|\s+/)[0];
+    if (first && first.length >= 3) {
+      for (var n = 0; n < AIRPORTS.length; n++) {
+        if (AIRPORTS[n][1].toLowerCase().indexOf(first) === 0) return AIRPORTS[n][0];
+      }
+    }
+    return null;
+  }
+
+  function airportName(c) {
+    for (var i = 0; i < AIRPORTS.length; i++) if (AIRPORTS[i][0] === c) return AIRPORTS[i][1];
+    return c;
+  }
+
+  function prettyDate(d) {
+    if (!d) return '';
+    var p = d.split('-');
+    return new Date(+p[0], +p[1] - 1, +p[2])
+      .toLocaleDateString(undefined, { day: 'numeric', month: 'short', year: 'numeric' });
+  }
+
+  /* Show exactly what will be searched, so a wrong airport is obvious
+     before the new tab opens rather than after. */
+  function showResolved() {
+    var box = $('resolved');
+    var f = code($('from').value), t = code($('to').value);
+    var fv = $('from').value.trim(), tv = $('to').value.trim();
+
+    if (!fv && !tv) { box.style.display = 'none'; return; }
+    var rows = [];
+    if (fv) rows.push(f ? '<b>' + f + '</b> — ' + airportName(f)
+                       : '<b style="color:#b3261e">Not recognised:</b> "' + fv + '"');
+    if (tv) rows.push(t ? '<b>' + t + '</b> — ' + airportName(t)
+                       : '<b style="color:#b3261e">Not recognised:</b> "' + tv + '"');
+
+    var when = prettyDate($('dep').value) + (roundTrip && $('ret').value ? ' → ' + prettyDate($('ret').value) : ' (one way)');
+    var who = $('pax').value + ' ' + ($('pax').value === '1' ? 'traveller' : 'travellers');
+
+    box.style.display = '';
+    box.className = (f && t) ? 'notice info' : 'notice alert';
+    box.innerHTML = '<b>' + ((f && t) ? 'Searching for' : 'Check this before searching') + '</b>' +
+      rows.join('<br>') + '<br>' + when + ' · ' + who +
+      (!f || !t ? '<br><span style="font-size:.8rem">Pick an option from the suggestions list, or type the 3-letter airport code.</span>' : '');
+  }
+  function label(v) { return (v || '').split('—')[1] ? v.split('—')[1].trim() : v; }
+  function yymmdd(d) { return d ? d.slice(2, 4) + d.slice(5, 7) + d.slice(8, 10) : ''; }
+
+  function valid() {
+    var f = code($('from').value), t = code($('to').value), d = $('dep').value;
+    showResolved();
+    if (!f) { MG.toast('Pick a departure airport from the list'); $('from').focus(); return null; }
+    if (!t) { MG.toast('Pick a destination from the list'); $('to').focus(); return null; }
+    if (f === t) { MG.toast('Departure and destination are the same'); return null; }
+    if (!d) { MG.toast('Pick a departure date'); $('dep').focus(); return null; }
+    if (roundTrip && !$('ret').value) { MG.toast('Pick a return date'); $('ret').focus(); return null; }
+    return { f: f, t: t, d: d, r: roundTrip ? $('ret').value : '', p: $('pax').value, c: $('cabin').value };
+  }
+
+  var CABIN_G = { e: 'economy', p: 'premium economy', b: 'business class' };
+  var CABIN_K = { e: '', p: '/premium', b: '/business' };
+  var CABIN_S = { e: 'economy', p: 'premiumeconomy', b: 'business' };
+
+  function urls(v) {
+    var aff = MG_CONFIG.affiliate;
+    var q = 'Flights from ' + v.f + ' to ' + v.t + ' on ' + v.d +
+            (v.r ? ' through ' + v.r : ' one way') +
+            ' for ' + v.p + ' ' + (v.p === '1' ? 'adult' : 'adults') +
+            ' in ' + CABIN_G[v.c];
+
+    var sky = 'https://www.skyscanner.net/transport/flights/' + v.f.toLowerCase() + '/' + v.t.toLowerCase() +
+      '/' + yymmdd(v.d) + '/' + (v.r ? yymmdd(v.r) + '/' : '') +
+      '?adults=' + v.p + '&cabinclass=' + CABIN_S[v.c] + (aff.skyscanner ? '&' + aff.skyscanner : '');
+
+    var kayak = 'https://www.kayak.com/flights/' + v.f + '-' + v.t + '/' + v.d +
+      (v.r ? '/' + v.r : '') + CABIN_K[v.c] + '?adults=' + v.p + '&sort=price_a';
+
+    var momondo = 'https://www.momondo.com/flight-search/' + v.f + '-' + v.t + '/' + v.d +
+      (v.r ? '/' + v.r : '') + CABIN_K[v.c] + '?adults=' + v.p + '&sort=price_a';
+
+    var trip = 'https://www.trip.com/flights/showfarefirst?dcity=' + v.f.toLowerCase() +
+      '&acity=' + v.t.toLowerCase() + '&ddate=' + v.d + (v.r ? '&rdate=' + v.r : '') +
+      '&triptype=' + (v.r ? 'rt' : 'ow') + '&class=' + (v.c === 'b' ? 'c' : v.c === 'p' ? 'w' : 'y') +
+      '&quantity=' + v.p + (aff.tripcom ? '&' + aff.tripcom : '');
+
+    return {
+      google: 'https://www.google.com/travel/flights?q=' + MG.q(q),
+      sky: sky, kayak: kayak, momondo: momondo, trip: trip
+    };
+  }
+
+  function fire(key) {
+    var v = valid(); if (!v) return;
+    var u = urls(v);
+    if (key === 'all') {
+      ['google', 'sky', 'kayak', 'momondo', 'trip'].forEach(function (k, i) {
+        setTimeout(function () { MG.go(u[k]); }, i * 400);
+      });
+      MG.toast('Opening five tabs — allow pop-ups if blocked');
+    } else {
+      MG.go(u[key]);
+    }
+  }
+
+  $('goGoogle').addEventListener('click', function () { fire('google'); });
+  $('goSky').addEventListener('click', function () { fire('sky'); });
+  $('goKayak').addEventListener('click', function () { fire('kayak'); });
+  $('goMomondo').addEventListener('click', function () { fire('momondo'); });
+  $('goTrip').addEventListener('click', function () { fire('trip'); });
+  $('goAll').addEventListener('click', function () { fire('all'); });
+
+  $('tripRound').addEventListener('click', function () {
+    roundTrip = true; this.classList.add('on'); $('tripOne').classList.remove('on');
+    $('retWrap').style.display = ''; if (window.saveFormRef) saveFormRef(); showResolved();
+  });
+  $('tripOne').addEventListener('click', function () {
+    roundTrip = false; this.classList.add('on'); $('tripRound').classList.remove('on');
+    $('retWrap').style.display = 'none'; if (window.saveFormRef) saveFormRef(); showResolved();
+  });
+
+  document.querySelectorAll('[data-dest]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      $('to').value = this.getAttribute('data-dest');
+      document.querySelectorAll('[data-dest]').forEach(function (x) { x.classList.remove('on'); });
+      this.classList.add('on');
+      if (window.saveFormRef) saveFormRef();
+      showResolved();
+    });
+  });
+
+  // sensible default dates: 3 weeks out, 10-day trip
+  function iso(d) { return d.toISOString().slice(0, 10); }
+  var d1 = new Date(); d1.setDate(d1.getDate() + 21);
+  var d2 = new Date(); d2.setDate(d2.getDate() + 31);
+  $('dep').value = iso(d1); $('ret').value = iso(d2);
+  $('dep').min = iso(new Date());
+  $('dep').addEventListener('change', function () { $('ret').min = this.value; });
+
+  /* Remember the whole form, not just the origin — so coming back from a
+     search tab, or reopening the site later, doesn't mean retyping it. */
+  var FIELDS = ['from', 'to', 'dep', 'ret', 'pax', 'cabin'];
+  window.saveFormRef = saveForm;
+  function saveForm() {
+    var o = {};
+    FIELDS.forEach(function (k) { o[k] = $(k).value; });
+    o.roundTrip = roundTrip;
+    MG.set('flightForm', o);
+  }
+  var savedForm = MG.get('flightForm', null);
+  if (savedForm && typeof savedForm === 'object') {
+    FIELDS.forEach(function (k) { if (savedForm[k]) $(k).value = savedForm[k]; });
+    // don't restore a departure date that has already passed
+    if (savedForm.dep && savedForm.dep < iso(new Date())) {
+      $('dep').value = iso(d1); $('ret').value = iso(d2);
+    }
+    if (savedForm.roundTrip === false) $('tripOne').click();
+  }
+  FIELDS.forEach(function (k) {
+    $(k).addEventListener('input', function () { saveForm(); showResolved(); });
+    $(k).addEventListener('change', function () { saveForm(); showResolved(); });
+  });
+  showResolved();
+})();
+</script>
+
+
+</body></html>

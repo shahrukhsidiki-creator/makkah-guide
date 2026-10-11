@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Food Near Me in Makkah — Pakistani, Indian, Arab, Turkish &amp; More | Makkah Guide</title>
+<meta name="description" content="Find restaurants near you in Makkah by cuisine: Pakistani, Indian, Bangladeshi, Arab, Egyptian, Turkish, Indonesian, Malaysian, Afghan, Yemeni and more. Uses your phone's location to open a live map search.">
+<meta name="theme-color" content="#0a3b2c">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="hdr-row">
+      <a class="brand" href="index.html">
+        <span class="mark" aria-hidden="true">🕋</span>
+        <span><b>Makkah Guide</b><small data-i18n="ui.brand_tag">Umrah &amp; travel companion</small></span>
+      </a>
+      <div class="hdr-actions">
+        <button class="icon-btn" id="langBtn" type="button" aria-label="Change language">EN</button>
+        <button class="icon-btn" id="themeBtn" type="button" aria-label="Toggle dark mode">🌙</button>
+      </div>
+    </div>
+    <div class="page-title">
+      <a class="back-link" href="more.html" data-i18n="food.001">← More</a>
+      <h1 data-i18n="food.002">Food near me</h1>
+      <p data-i18n="food.003">Pick a cuisine, tap search. Opens a live map of what's actually open around you.</p>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="card">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+      <span id="locDot" style="width:10px;height:10px;border-radius:50%;background:#bbb;flex:0 0 10px"></span>
+      <span class="muted" style="font-size:.86rem;flex:1" id="locStatus" data-i18n="food.004">Location not shared yet — results will centre on the Haram</span>
+      <button class="btn sm ghost" id="locBtn" type="button" style="width:auto" data-i18n="food.005">📍 Use my location</button>
+    </div>
+
+    <label class="fld">
+      <span data-i18n="food.006">What are you in the mood for?</span>
+      <select id="cuisine">
+        <optgroup label="South Asian">
+          <option value="Pakistani restaurant" data-i18n="food.007">Pakistani / Desi</option>
+          <option value="Indian restaurant" data-i18n="food.008">Indian</option>
+          <option value="Hyderabadi biryani restaurant" data-i18n="food.009">Biryani &amp; Hyderabadi</option>
+          <option value="Bangladeshi restaurant" data-i18n="food.010">Bangladeshi</option>
+          <option value="Afghan restaurant" data-i18n="food.011">Afghan</option>
+          <option value="Karahi tikka BBQ restaurant" data-i18n="food.012">Karahi / Tikka / BBQ</option>
+          <option value="Nihari paya breakfast restaurant" data-i18n="food.013">Nihari &amp; Paya</option>
+        </optgroup>
+        <optgroup label="Arab">
+          <option value="Arabic restaurant" data-i18n="food.014">Arabic (general)</option>
+          <option value="Saudi kabsa mandi restaurant" data-i18n="food.015">Saudi — Kabsa &amp; Mandi</option>
+          <option value="Yemeni restaurant mandi" data-i18n="food.016">Yemeni</option>
+          <option value="Egyptian restaurant koshari" data-i18n="food.017">Egyptian / Koshari</option>
+          <option value="Lebanese Syrian shawarma restaurant" data-i18n="food.018">Lebanese &amp; Syrian</option>
+          <option value="falafel hummus restaurant" data-i18n="food.019">Falafel &amp; Hummus</option>
+        </optgroup>
+        <optgroup label="Other">
+          <option value="Turkish restaurant" data-i18n="food.020">Turkish</option>
+          <option value="Indonesian restaurant" data-i18n="food.021">Indonesian</option>
+          <option value="Malaysian restaurant" data-i18n="food.022">Malaysian</option>
+          <option value="Filipino restaurant" data-i18n="food.023">Filipino</option>
+          <option value="Chinese halal restaurant" data-i18n="food.024">Chinese (halal)</option>
+          <option value="Nigerian African restaurant" data-i18n="food.025">African / Nigerian</option>
+        </optgroup>
+        <optgroup label="Quick &amp; cheap">
+          <option value="cheap restaurant budget meal" data-i18n="food.026">Budget meals</option>
+          <option value="fast food restaurant" data-i18n="food.027">Fast food</option>
+          <option value="shawarma shop" data-i18n="food.028">Shawarma</option>
+          <option value="bakery" data-i18n="food.029">Bakery</option>
+          <option value="cafe coffee shop" data-i18n="food.030">Café &amp; coffee</option>
+          <option value="juice shop fresh juice" data-i18n="food.031">Fresh juice</option>
+          <option value="supermarket grocery" data-i18n="food.032">Supermarket</option>
+          <option value="food court mall" data-i18n="food.033">Food court</option>
+          <option value="restaurant open 24 hours" data-i18n="food.034">Open 24 hours</option>
+          <option value="vegetarian restaurant" data-i18n="food.035">Vegetarian</option>
+        </optgroup>
+      </select>
+    </label>
+
+    <div class="btn-row">
+      <button class="btn" id="searchBtn" type="button"><span data-i18n="food.x001">🔎 Find it near me</span> <span class="ext" data-i18n="food.036">↗</span></button>
+    </div>
+    <div class="btn-row two" style="margin-top:9px">
+      <button class="btn ghost sm" id="haramBtn" type="button"><span data-i18n="food.x002">Near the Haram instead</span> <span class="ext" data-i18n="food.037">↗</span></button>
+      <button class="btn ghost sm" id="deliverBtn" type="button"><span data-i18n="food.x003">Delivery apps</span> <span class="ext" data-i18n="food.038">↗</span></button>
+    </div>
+    <p class="hint" data-i18n="food.039">Opens Google Maps in a new tab, so you get current opening hours, reviews and walking directions rather than a list that goes out of date.</p>
+  </div>
+
+  <section class="section">
+    <h2><span class="ic" data-i18n="food.040">⚡</span> <span data-i18n="food.x004">One tap</span></h2>
+    <div class="quick-row" id="quickRow"></div>
+  </section>
+
+  <div class="ad-slot" data-hint="Restaurant promotions, delivery offers, catering"></div>
+
+  <section class="section">
+    <h2><span class="ic" data-i18n="food.041">🍽️</span> <span data-i18n="food.x005">Eating well without spending much</span></h2>
+
+    <details class="acc">
+      <summary data-i18n="food.042">Where the cheap food actually is</summary>
+      <div class="acc-body">
+        <ul class="ticks" style="margin:0">
+          <li data-i18n="food.m001"><b>Walk away from the Haram.</b> Prices roughly halve between the clock-tower food courts and the side streets ten minutes out. The same biryani can be SAR 30 in one place and SAR 12 in the other.</li>
+          <li data-i18n="food.m002"><b>Mall food courts</b> — convenient, air-conditioned, mid-priced, and good when you're with a group that wants different things.</li>
+          <li data-i18n="food.m003"><b>Workers' restaurants</b> in the residential districts (Aziziyah, Misfalah, Shisha) serve full meals for very little. Busy with local workers is the signal to look for.</li>
+          <li data-i18n="food.m004"><b>Supermarkets</b> — bread, laban, fruit, dates and cooked items from the hot counter. Easily the cheapest way to eat, and useful for keeping food in the room.</li>
+          <li data-i18n="food.m005"><b>Share.</b> Portions in desi and Arab restaurants are large. Two people can often eat from one mandi or one karahi.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="acc">
+      <summary data-i18n="food.048">Eating around prayer times</summary>
+      <div class="acc-body">
+        <p style="margin:0;font-size:.92rem" data-i18n="food.049">Shops and restaurants close for congregational prayers and reopen afterwards. The stretch right after Maghrib is the busiest of the day near the Haram. Either eat well before the adhan, or wait out the rush — trying to eat in the twenty minutes after a prayer means queues everywhere.</p>
+      </div>
+    </details>
+
+    <details class="acc">
+      <summary data-i18n="food.050">Staying well</summary>
+      <div class="acc-body">
+        <ul class="ticks" style="margin:0">
+          <li data-i18n="food.051">Stomach upsets are the most common thing that ruins an Umrah trip. Prefer food that is cooked fresh and served hot.</li>
+          <li data-i18n="food.052">Be careful with salads, cut fruit and anything that's been sitting under a heat lamp.</li>
+          <li data-i18n="food.053">Drink far more water than feels necessary. Zamzam is free and everywhere inside the Haram — use it.</li>
+          <li data-i18n="food.054">Carry oral rehydration sachets. They weigh nothing and are the difference between losing an afternoon and losing three days.</li>
+          <li data-i18n="food.055">In summer, eat lighter during the day. Heavy meals plus heat plus walking is how people end up in the clinic.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="acc">
+      <summary data-i18n="food.056">Dietary needs</summary>
+      <div class="acc-body">
+        <p style="margin:0 0 8px;font-size:.92rem" data-i18n="food.057">All meat in Saudi Arabia is halal, so that is one thing you don't need to think about.</p>
+        <p style="margin:0;font-size:.92rem" data-i18n="food.058">Vegetarian and vegan travellers do need to plan: South Indian, Egyptian (koshari, ful, falafel) and Lebanese mezze are your reliable options. Gluten-free is harder — supermarkets in the larger malls are your best bet.</p>
+      </div>
+    </details>
+  </section>
+
+  <section class="section">
+    <h2><span class="ic" data-i18n="food.059">🛵</span> <span data-i18n="food.x011">Delivery</span></h2>
+    <div class="card">
+      <p style="font-size:.92rem;margin-top:0" data-i18n="food.060">Delivery works well in Makkah and is often cheaper than eating near the Haram — useful when you're exhausted after Tawaf and don't want to go back out.</p>
+      <div class="btn-row two">
+        <button class="btn ghost sm" type="button" onclick="MG.go('https://www.hungerstation.com/')"><span data-i18n="food.x012">HungerStation</span> <span class="ext" data-i18n="food.061">↗</span></button>
+        <button class="btn ghost sm" type="button" onclick="MG.go('https://www.talabat.com/saudi')"><span data-i18n="food.x013">Talabat</span> <span class="ext" data-i18n="food.062">↗</span></button>
+      </div>
+      <p class="hint" data-i18n="food.063">Give the hotel name and a landmark rather than relying on the map pin — addressing near the Haram is difficult and riders often can't find the pin.</p>
+    </div>
+  </section>
+
+  <div class="disclaimer" data-i18n="food.064">
+    This page does not recommend, rank or endorse specific restaurants and has no commercial relationship with any of them. It builds a map search and hands you to Google Maps or a delivery provider, where their own ratings and terms apply. Use your own judgement on hygiene and price.
+  </div>
+
+</main>
+
+<script src="assets/app.js"></script>
+<script src="assets/i18n.js"></script>
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var pos = null;
+
+  var QUICK = [
+    ['🍛', 'Desi', 'Pakistani Indian restaurant'],
+    ['🥙', 'Shawarma', 'shawarma shop'],
+    ['🍚', 'Mandi', 'mandi kabsa restaurant'],
+    ['🛒', 'Grocery', 'supermarket grocery']
+  ];
+  $('quickRow').innerHTML = QUICK.map(function (q, i) {
+    return '<button class="quick" type="button" data-q="' + q[2] + '">' +
+           '<span class="ic">' + q[0] + '</span><span>' + q[1] + '</span></button>';
+  }).join('');
+
+  function search(term) {
+    if (pos) MG.mapsNear(term, pos.lat, pos.lng);
+    else MG.maps(term + ' near Masjid al-Haram Makkah');
+  }
+
+  $('searchBtn').addEventListener('click', function () { search($('cuisine').value); });
+  $('haramBtn').addEventListener('click', function () {
+    MG.maps($('cuisine').value + ' near Masjid al-Haram Makkah');
+  });
+  $('deliverBtn').addEventListener('click', function () {
+    MG.google($('cuisine').value + ' delivery Makkah HungerStation Talabat');
+  });
+
+  document.querySelectorAll('[data-q]').forEach(function (b) {
+    b.addEventListener('click', function () { search(this.getAttribute('data-q')); });
+  });
+
+  $('locBtn').addEventListener('click', function () {
+    $('locStatus').textContent = 'Getting your location…';
+    MG.locate(function (la, ln) {
+      pos = { lat: la, lng: ln };
+      $('locDot').style.background = '#1a7a5a';
+      $('locStatus').textContent = 'Using your location — results will centre on where you are';
+      MG.toast('Location set');
+    }, function (why) {
+      $('locDot').style.background = '#b3261e';
+      $('locStatus').textContent = why === 'denied'
+        ? 'Location declined — searches will centre on the Haram instead'
+        : 'Couldn\'t get your location — searches will centre on the Haram';
+    });
+  });
+})();
+</script>
+
+
+</body></html>

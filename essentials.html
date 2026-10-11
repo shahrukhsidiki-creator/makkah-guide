@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Umrah Essentials — Packing Checklist, Emergency Numbers, Arabic Phrases &amp; Dam Table | Makkah Guide</title>
+<meta name="description" content="Practical Umrah essentials: an interactive packing checklist that saves your progress, a note for which Haram gate you entered by, emergency numbers in Saudi Arabia, useful Arabic phrases, the dam and fidya table, and health tips for the heat.">
+<meta name="theme-color" content="#0a3b2c">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="hdr-row">
+      <a class="brand" href="index.html">
+        <span class="mark" aria-hidden="true">🕋</span>
+        <span><b>Makkah Guide</b><small data-i18n="ui.brand_tag">Umrah &amp; travel companion</small></span>
+      </a>
+      <div class="hdr-actions">
+        <button class="icon-btn" id="langBtn" type="button" aria-label="Change language">EN</button>
+        <button class="icon-btn" id="themeBtn" type="button" aria-label="Toggle dark mode">🌙</button>
+      </div>
+    </div>
+    <div class="page-title">
+      <a class="back-link" href="more.html" data-i18n="essentials.001">← More</a>
+      <h1 data-i18n="essentials.002">Essentials</h1>
+      <p data-i18n="essentials.003">The practical things — packing, getting lost, emergencies, phrases, and what to do if you slip up in Ihram.</p>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="chips">
+    <a class="chip" href="#checklist" data-i18n="essentials.004">🧳 Checklist</a>
+    <a class="chip" href="#gate" data-i18n="essentials.005">📍 My gate</a>
+    <a class="chip" href="#emergency" data-i18n="essentials.006">🆘 Emergency</a>
+    <a class="chip" href="#phrases" data-i18n="essentials.007">💬 Phrases</a>
+    <a class="chip" href="#dam" data-i18n="essentials.008">⚖️ Dam &amp; fidya</a>
+    <a class="chip" href="#health" data-i18n="essentials.009">🌡️ Health</a>
+  </div>
+
+  <!-- ===== Gate ===== -->
+  <section class="section" id="gate">
+    <h2><span class="ic" data-i18n="essentials.010">📍</span> <span data-i18n="essentials.x001">Where did I come in?</span></h2>
+    <div class="card accent">
+      <p style="font-size:.92rem;margin-top:0" data-i18n="essentials.011">Masjid al-Haram has over a hundred gates across several levels, and they look alike from inside. Write down where you entered <em>before</em> you walk in. People get separated here every single day.</p>
+      <label class="fld">
+        <span data-i18n="essentials.012">Gate number or name</span>
+        <input id="gateNum" placeholder="e.g. Gate 79 — King Abdulaziz" data-i18n-placeholder="essentials.ph158">
+      </label>
+      <div class="fld-2">
+        <label class="fld"><span data-i18n="essentials.013">Level / floor</span>
+          <select id="gateFloor">
+            <option data-i18n="essentials.014">Ground</option><option data-i18n="essentials.015">Basement</option><option data-i18n="essentials.016">First floor</option>
+            <option data-i18n="essentials.017">Second floor</option><option data-i18n="essentials.018">Roof</option><option data-i18n="essentials.019">Not sure</option>
+          </select>
+        </label>
+        <label class="fld"><span data-i18n="essentials.020">Shoe rack number</span><input id="gateShoes" placeholder="e.g. rack 12" data-i18n-placeholder="essentials.ph159"></label>
+      </div>
+      <label class="fld">
+        <span data-i18n="essentials.021">Landmark outside (hotel, tower, direction)</span>
+        <input id="gateNote" placeholder="e.g. clock tower on my right as I came in" data-i18n-placeholder="essentials.ph160">
+      </label>
+      <div class="btn-row two">
+        <button class="btn" id="gateSave" type="button" data-i18n="essentials.022">Save</button>
+        <button class="btn ghost" id="gateClear" type="button" data-i18n="essentials.023">Clear</button>
+      </div>
+      <div class="notice info" id="gateSaved" style="display:none">
+        <b data-i18n="essentials.024">Saved</b>
+        <span id="gateSavedText"></span>
+      </div>
+      <p class="hint" data-i18n="essentials.025">Stored on this device only. Photograph your gate sign too — it's faster than typing when you're in a hurry.</p>
+    </div>
+  </section>
+
+  <!-- ===== Checklist ===== -->
+  <section class="section" id="checklist">
+    <h2><span class="ic" data-i18n="essentials.026">🧳</span> <span data-i18n="essentials.x002">Packing checklist</span></h2>
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px">
+        <span class="muted" style="font-size:.86rem" id="progress" data-i18n="essentials.027">0 of 0 packed</span>
+        <button class="btn sm ghost" id="clearChecks" type="button" style="width:auto" data-i18n="essentials.028">Reset</button>
+      </div>
+      <div id="checklistBody"></div>
+    </div>
+  </section>
+
+  <div class="ad-slot" data-hint="Travel gear, Ihram kits, pharmacies, insurance"></div>
+
+  <!-- ===== Emergency ===== -->
+  <section class="section" id="emergency">
+    <h2><span class="ic" data-i18n="essentials.029">🆘</span> <span data-i18n="essentials.x003">Emergency &amp; useful numbers</span></h2>
+    <div class="card">
+      <div class="notice alert" style="margin-top:0">
+        <b data-i18n="essentials.030">911 — unified emergency number</b> <span data-i18n="essentials.x004">Police, ambulance and fire. Operators generally speak English. This is the number to call first in any emergency.</span> </div>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th data-i18n="essentials.031">Service</th><th data-i18n="essentials.032">Number</th></tr></thead>
+          <tbody>
+            <tr><td data-i18n="essentials.033">Unified emergency (police / ambulance / fire)</td><td><b>911</b></td></tr>
+            <tr><td data-i18n="essentials.034">Red Crescent ambulance</td><td><b>997</b></td></tr>
+            <tr><td data-i18n="essentials.035">Police</td><td><b>999</b></td></tr>
+            <tr><td data-i18n="essentials.036">Civil defence / fire</td><td><b>998</b></td></tr>
+            <tr><td data-i18n="essentials.037">Traffic accidents (Najm)</td><td><b>993</b></td></tr>
+            <tr><td data-i18n="essentials.038">Traffic police</td><td><b>993</b></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="hint" data-i18n="essentials.039">Numbers can change — if one doesn't connect, use 911.</p>
+
+      <hr class="sep">
+      <h3 data-i18n="essentials.040">At the Haram</h3>
+      <ul class="ticks">
+        <li data-i18n="essentials.m001"><b>Lost person:</b> go to the nearest security point or lost-and-found office. There are marked points around the mosque, and staff are used to this.</li>
+        <li data-i18n="essentials.m002"><b>Lost child:</b> hand them to any guard immediately. There are dedicated lost-children points and they are very well run.</li>
+        <li data-i18n="essentials.m003"><b>Medical:</b> clinics and first-aid stations operate inside and around the mosque around the clock. Ask any guard for <em>"mustashfa"</em> or point to the problem.</li>
+        <li data-i18n="essentials.m004"><b>Wheelchairs:</b> available at the Haram, both free services and paid pushers. Agree a price up front with a paid pusher.</li>
+      </ul>
+
+      <hr class="sep">
+      <h3 data-i18n="essentials.045">Before you need them</h3>
+      <div class="btn-row two">
+        <button class="btn ghost sm" type="button" onclick="MG.google('my country embassy consulate Jeddah contact number')"><span data-i18n="essentials.x011">Find your consulate</span> <span class="ext" data-i18n="essentials.046">↗</span></button>
+        <button class="btn ghost sm" type="button" onclick="MG.maps('hospital near Masjid al-Haram Makkah')"><span data-i18n="essentials.x012">Nearest hospital</span> <span class="ext" data-i18n="essentials.047">↗</span></button>
+      </div>
+
+      <label class="fld" style="margin-top:14px">
+        <span data-i18n="essentials.048">Your own emergency contacts (saved on this device)</span>
+        <textarea id="myContacts" rows="4" placeholder="Group leader: +966 …
+Hotel: …, room …
+Travel insurance: …" data-i18n-placeholder="essentials.ph161"></textarea>
+      </label>
+      <button class="btn ghost sm" id="saveContacts" type="button" data-i18n="essentials.049">Save contacts</button>
+
+      <div class="notice warn" style="margin-bottom:0;margin-top:14px">
+        <b data-i18n="essentials.050">Carry a paper card</b> <span data-i18n="essentials.x013">Write your name, hotel, room number and your group leader's phone number on a card and keep it in your ihram belt. Phones run out of battery, and the elderly members of your group are the most likely to get lost.</span> </div>
+    </div>
+  </section>
+
+  <!-- ===== Phrases ===== -->
+  <section class="section" id="phrases">
+    <h2><span class="ic" data-i18n="essentials.051">💬</span> <span data-i18n="essentials.x014">Arabic phrases that actually get used</span></h2>
+    <div class="card">
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th data-i18n="essentials.052">English</th><th data-i18n="essentials.053">Arabic</th><th data-i18n="essentials.054">Say it like</th></tr></thead>
+          <tbody>
+            <tr><td data-i18n="essentials.055">Peace be upon you</td><td data-i18n="essentials.056">السلام عليكم</td><td data-i18n="essentials.057">as-salaamu alaykum</td></tr>
+            <tr><td data-i18n="essentials.058">Thank you</td><td data-i18n="essentials.059">شكراً</td><td data-i18n="essentials.060">shukran</td></tr>
+            <tr><td data-i18n="essentials.061">Please</td><td data-i18n="essentials.062">من فضلك</td><td data-i18n="essentials.063">min fadlak</td></tr>
+            <tr><td data-i18n="essentials.064">Yes / No</td><td data-i18n="essentials.065">نعم / لا</td><td data-i18n="essentials.066">na'am / laa</td></tr>
+            <tr><td data-i18n="essentials.067">How much?</td><td data-i18n="essentials.068">بكم؟</td><td data-i18n="essentials.069">bikam?</td></tr>
+            <tr><td data-i18n="essentials.070">Too expensive</td><td data-i18n="essentials.071">غالي كثير</td><td data-i18n="essentials.072">ghaali katheer</td></tr>
+            <tr><td data-i18n="essentials.073">Final price?</td><td data-i18n="essentials.074">آخر سعر؟</td><td data-i18n="essentials.075">aakhir si'r?</td></tr>
+            <tr><td data-i18n="essentials.076">Where is…?</td><td data-i18n="essentials.077">وين؟</td><td data-i18n="essentials.078">wayn?</td></tr>
+            <tr><td data-i18n="essentials.079">Where is the toilet?</td><td data-i18n="essentials.080">وين الحمام؟</td><td data-i18n="essentials.081">wayn al-hammaam?</td></tr>
+            <tr><td data-i18n="essentials.082">I am lost</td><td data-i18n="essentials.083">أنا ضايع</td><td data-i18n="essentials.084">ana daaye'</td></tr>
+            <tr><td data-i18n="essentials.085">Help me</td><td data-i18n="essentials.086">ساعدني</td><td data-i18n="essentials.087">saa'idni</td></tr>
+            <tr><td data-i18n="essentials.088">I need a doctor</td><td data-i18n="essentials.089">أحتاج دكتور</td><td data-i18n="essentials.090">ahtaaj doktoor</td></tr>
+            <tr><td data-i18n="essentials.091">Hospital</td><td data-i18n="essentials.092">مستشفى</td><td data-i18n="essentials.093">mustashfa</td></tr>
+            <tr><td data-i18n="essentials.094">Water</td><td data-i18n="essentials.095">ماء / موية</td><td data-i18n="essentials.096">maa' / mooya</td></tr>
+            <tr><td data-i18n="essentials.097">I don't understand</td><td data-i18n="essentials.098">ما أفهم</td><td data-i18n="essentials.099">maa afham</td></tr>
+            <tr><td data-i18n="essentials.100">Do you speak English?</td><td data-i18n="essentials.101">تتكلم إنجليزي؟</td><td data-i18n="essentials.102">titkallam ingileezi?</td></tr>
+            <tr><td data-i18n="essentials.103">Do you speak Urdu?</td><td data-i18n="essentials.104">تتكلم أردو؟</td><td data-i18n="essentials.105">titkallam urdu?</td></tr>
+            <tr><td data-i18n="essentials.106">Wait a moment</td><td data-i18n="essentials.107">لحظة</td><td data-i18n="essentials.108">lahza</td></tr>
+            <tr><td data-i18n="essentials.109">Let's go / drive on</td><td data-i18n="essentials.110">يلا</td><td data-i18n="essentials.111">yalla</td></tr>
+            <tr><td data-i18n="essentials.112">Enough / stop</td><td data-i18n="essentials.113">خلاص</td><td data-i18n="essentials.114">khalaas</td></tr>
+            <tr><td data-i18n="essentials.115">Is it open?</td><td data-i18n="essentials.116">مفتوح؟</td><td data-i18n="essentials.117">maftooh?</td></tr>
+            <tr><td data-i18n="essentials.118">Closed</td><td data-i18n="essentials.119">مغلق / مسكر</td><td data-i18n="essentials.120">mughlaq / msakkar</td></tr>
+            <tr><td data-i18n="essentials.121">Gate</td><td data-i18n="essentials.122">باب</td><td data-i18n="essentials.123">baab</td></tr>
+            <tr><td data-i18n="essentials.124">Where is gate 79?</td><td data-i18n="essentials.125">وين باب ٧٩؟</td><td data-i18n="essentials.126">wayn baab tis'a wa sab'een?</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="hint" data-i18n="essentials.127">A great many people working around the Haram speak Urdu, Bengali, Indonesian or English. Ask — <em>titkallam urdu?</em> solves a surprising number of problems.</p>
+    </div>
+  </section>
+
+  <!-- ===== Dam ===== -->
+  <section class="section" id="dam">
+    <h2><span class="ic" data-i18n="essentials.128">⚖️</span> <span data-i18n="essentials.x015">Dam &amp; fidya — if you break an Ihram rule</span></h2>
+    <div class="card">
+      <div class="notice warn" style="margin-top:0">
+        <b data-i18n="essentials.129">Read this before the table</b> <span data-i18n="essentials.x016">Rulings here differ substantially between schools of fiqh, and they also depend on whether the act was deliberate, forgetful, or forced by necessity. The table below is a</span> <em><span data-i18n="essentials.x017">general orientation only</span></em> <span data-i18n="essentials.x018">— it is not a fatwa and you should not act on it alone. If something has happened, ask a scholar. There are religious guidance offices at the Haram for exactly this.</span> </div>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th data-i18n="essentials.130">What happened</th><th data-i18n="essentials.131">Generally</th></tr></thead>
+          <tbody>
+            <tr><td data-i18n="essentials.132">Used perfume, or wore stitched clothing / covered the head (men), deliberately</td><td data-i18n="essentials.133">Fidya — a choice of fasting three days, feeding six poor people, or sacrificing a sheep</td></tr>
+            <tr><td data-i18n="essentials.134">Cut hair or clipped nails deliberately</td><td data-i18n="essentials.135">Fidya, as above; small amounts may be treated differently</td></tr>
+            <tr><td data-i18n="essentials.136">Did any of the above forgetfully, or out of genuine necessity, and stopped on realising</td><td data-i18n="essentials.137">Many scholars hold nothing is due; necessity cases may still require fidya in some schools</td></tr>
+            <tr><td data-i18n="essentials.138">Missed an obligation, e.g. crossed the Miqat without Ihram and did not return</td><td data-i18n="essentials.139">Dam — a sacrifice</td></tr>
+            <tr><td data-i18n="essentials.140">Intimacy before completing the Umrah</td><td data-i18n="essentials.141">Serious — may invalidate the Umrah and require a sacrifice plus making it up. Ask a scholar immediately.</td></tr>
+            <tr><td data-i18n="essentials.142">Hunted land game in the Haram</td><td data-i18n="essentials.143">Compensation, assessed according to the animal</td></tr>
+            <tr><td data-i18n="essentials.144">Unable to complete the Umrah due to illness or being prevented</td><td data-i18n="essentials.145">Specific rulings apply — ask a scholar rather than deciding yourself</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="hint" data-i18n="essentials.146">Any required sacrifice must be performed within the Haram and the meat distributed to the poor there. Licensed outlets and the official Adahi programme handle this — do not buy from unlicensed sellers.</p>
+      <div class="btn-row two" style="margin-top:12px">
+        <button class="btn ghost sm" type="button" onclick="MG.maps('fatwa religious guidance office Masjid al-Haram Makkah')"><span data-i18n="essentials.x019">Guidance offices at the Haram</span> <span class="ext" data-i18n="essentials.147">↗</span></button>
+        <button class="btn ghost sm" type="button" onclick="MG.google('Adahi hady sacrifice booking Makkah official')"><span data-i18n="essentials.x020">Official sacrifice programme</span> <span class="ext" data-i18n="essentials.148">↗</span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Health ===== -->
+  <section class="section" id="health">
+    <h2><span class="ic" data-i18n="essentials.149">🌡️</span> <span data-i18n="essentials.x021">Staying well</span></h2>
+    <div class="card">
+      <ul class="ticks">
+        <li data-i18n="essentials.m005"><b>Heat.</b> Makkah summers regularly exceed 45°C. Move in the early morning and after Maghrib; rest in the middle of the day. The marble around the mataf gets genuinely painfully hot — the inner areas are cooled, the outer ones are not.</li>
+        <li data-i18n="essentials.m006"><b>Hydration.</b> Zamzam is free and everywhere. Drink constantly, not just when thirsty. Dark urine means you are already behind.</li>
+        <li data-i18n="essentials.m007"><b>Feet.</b> You will walk far more than you expect — ten to fifteen kilometres a day is normal. Break your shoes in at home. Bring blister plasters.</li>
+        <li data-i18n="essentials.m008"><b>"Hajj flu".</b> Millions of people from everywhere in the world, in close quarters. A cough spreads through the whole group. A mask in crowds genuinely helps.</li>
+        <li data-i18n="essentials.m009"><b>Medication.</b> Bring enough for the whole trip plus several days, in original packaging, with a prescription or doctor's letter for anything unusual.</li>
+        <li data-i18n="essentials.m010"><b>Pace yourself.</b> The common mistake is doing too much on day one — multiple Umrahs, all the ziyarat, every prayer in the Haram — then spending days three and four ill in the hotel. The trip is a marathon.</li>
+      </ul>
+      <div class="notice info" style="margin-bottom:0">
+        <b data-i18n="essentials.156">For elderly travellers</b> <span data-i18n="essentials.x028">Wheelchair services are widely available at the Haram, both free and paid, and the upper floors are far less crowded and fully accessible — Tawaf and Sa'i on the first floor or roof take longer per circuit but are enormously easier. There is no virtue in struggling at ground level.</span> </div>
+    </div>
+  </section>
+
+  <div class="disclaimer" data-i18n="essentials.157">
+    General information only. Nothing on this page is medical or religious advice. Emergency numbers and services can change — verify locally. For any question about dam, fidya or a broken Ihram rule, consult a qualified scholar rather than relying on this page.
+  </div>
+
+</main>
+
+<script src="assets/app.js"></script>
+<script src="assets/i18n.js"></script>
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+
+  /* ---------- Checklist ---------- */
+  var LIST = [
+    ['Documents', [
+      'Passport (6+ months validity)',
+      'Visa / permit confirmation',
+      'Vaccination certificate',
+      'Flight tickets (printed and on phone)',
+      'Hotel booking confirmation',
+      'Travel insurance details',
+      'Photocopies of everything, kept separately',
+      'Passport photos (a few spare)',
+      'Emergency contact card for your pocket'
+    ]],
+    ['Ihram & prayer', [
+      'Ihram sheets ×2 sets (men)',
+      'Ihram belt with pouch (men)',
+      'Modest loose clothing (women)',
+      'Lightweight prayer mat',
+      'Shoe bag (drawstring)',
+      'Small Quran or app downloaded offline',
+      'Misbaha'
+    ]],
+    ['Unscented toiletries', [
+      'Unscented soap / body wash',
+      'Unscented wet wipes',
+      'Unscented deodorant',
+      'Unscented lip balm',
+      'Unscented moisturiser',
+      'Toothbrush and toothpaste',
+      'Miswak'
+    ]],
+    ['Health', [
+      'Regular medication + spare days',
+      'Oral rehydration sachets',
+      'Painkillers',
+      'Blister plasters',
+      'Anti-diarrhoea tablets',
+      'Throat lozenges',
+      'Face masks',
+      'Hand sanitiser (unscented while in Ihram)',
+      'Small first-aid kit'
+    ]],
+    ['Practical', [
+      'Comfortable walking sandals',
+      'Flip-flops for the hotel',
+      'Umbrella (sun and rain)',
+      'Refillable water bottle',
+      'Power bank',
+      'Charging cable + universal adapter',
+      'Small padlock',
+      'Foldable bag for shopping on the way home',
+      'Cash in small notes',
+      'Card (tell your bank you are travelling)'
+    ]],
+    ['Before you leave home', [
+      'Add this guide to your home screen',
+      'Download offline maps of Makkah',
+      'Book Rawdah permit if visiting Madinah',
+      'Check airline Zamzam and baggage rules',
+      'Share your itinerary with family',
+      'Settle your debts and seek forgiveness from people'
+    ]]
+  ];
+
+  var checks = MG.get('checks', {});
+  if (typeof checks !== 'object' || checks === null) checks = {};
+
+  function renderList() {
+    var html = '', total = 0, done = 0;
+    LIST.forEach(function (group, gi) {
+      html += '<h3 style="margin:' + (gi ? '18px' : '0') + ' 0 6px;font-size:.88rem;text-transform:uppercase;letter-spacing:.8px;color:var(--text-soft)">' + group[0] + '</h3>';
+      group[1].forEach(function (item, ii) {
+        var id = 'c' + gi + '_' + ii, on = !!checks[id];
+        total++; if (on) done++;
+        html += '<div class="check-item' + (on ? ' done' : '') + '">' +
+          '<input type="checkbox" id="' + id + '"' + (on ? ' checked' : '') + '>' +
+          '<label for="' + id + '">' + item + '</label></div>';
+      });
+    });
+    $('checklistBody').innerHTML = html;
+    $('progress').textContent = done + ' of ' + total + ' packed';
+
+    $('checklistBody').querySelectorAll('input[type=checkbox]').forEach(function (cb) {
+      cb.addEventListener('change', function () {
+        checks[this.id] = this.checked;
+        MG.set('checks', checks);
+        this.closest('.check-item').classList.toggle('done', this.checked);
+        var t = 0, d = 0;
+        LIST.forEach(function (g, gi) { g[1].forEach(function (x, ii) { t++; if (checks['c' + gi + '_' + ii]) d++; }); });
+        $('progress').textContent = d + ' of ' + t + ' packed';
+      });
+    });
+  }
+  renderList();
+
+  $('clearChecks').addEventListener('click', function () {
+    if (confirm('Clear every tick on the checklist?')) { checks = {}; MG.set('checks', checks); renderList(); }
+  });
+
+  /* ---------- Gate ---------- */
+  function showGate() {
+    var g = MG.get('gate', null);
+    if (!g) { $('gateSaved').style.display = 'none'; return; }
+    $('gateNum').value = g.num || '';
+    $('gateFloor').value = g.floor || 'Ground';
+    $('gateShoes').value = g.shoes || '';
+    $('gateNote').value = g.note || '';
+    var bits = [];
+    if (g.num) bits.push(g.num);
+    if (g.floor) bits.push(g.floor);
+    if (g.shoes) bits.push('shoes: ' + g.shoes);
+    if (g.note) bits.push(g.note);
+    $('gateSavedText').textContent = bits.join(' · ');
+    $('gateSaved').style.display = bits.length ? '' : 'none';
+  }
+  $('gateSave').addEventListener('click', function () {
+    MG.set('gate', {
+      num: $('gateNum').value, floor: $('gateFloor').value,
+      shoes: $('gateShoes').value, note: $('gateNote').value
+    });
+    showGate(); MG.toast('Gate details saved');
+  });
+  $('gateClear').addEventListener('click', function () {
+    MG.set('gate', null);
+    $('gateNum').value = ''; $('gateShoes').value = ''; $('gateNote').value = '';
+    $('gateSaved').style.display = 'none';
+  });
+  showGate();
+
+  /* ---------- Contacts ---------- */
+  $('myContacts').value = MG.get('contacts', '');
+  $('saveContacts').addEventListener('click', function () {
+    MG.set('contacts', $('myContacts').value);
+    MG.toast('Contacts saved on this device');
+  });
+})();
+</script>
+
+
+</body></html>

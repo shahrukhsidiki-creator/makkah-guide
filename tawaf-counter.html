@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Tawaf &amp; Sa'i Counter — Works Offline | Makkah Guide</title>
+<meta name="description" content="A simple offline Tawaf and Sa'i counter. Big tap target, saves your place if the screen locks or the app closes, and vibrates when you reach seven.">
+<meta name="theme-color" content="#0a3b2c">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="hdr-row">
+      <a class="brand" href="index.html">
+        <span class="mark" aria-hidden="true">🕋</span>
+        <span><b>Makkah Guide</b><small data-i18n="ui.brand_tag">Umrah &amp; travel companion</small></span>
+      </a>
+      <div class="hdr-actions">
+        <button class="icon-btn" id="langBtn" type="button" aria-label="Change language">EN</button>
+        <button class="icon-btn" id="themeBtn" type="button" aria-label="Toggle dark mode">🌙</button>
+      </div>
+    </div>
+    <div class="page-title">
+      <a class="back-link" href="index.html">← <span data-i18n="back">Back</span></a>
+      <h1 data-i18n="tawaf-counter.001">Counter</h1>
+      <p data-i18n="tawaf-counter.002">Your count is saved automatically — lock the screen, take a call, come back to it.</p>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="chips" role="tablist" aria-label="Counter mode">
+    <button class="chip on" id="modeTawaf" type="button" role="tab" data-i18n="tawaf-counter.003">🕋 Tawaf</button>
+    <button class="chip" id="modeSai" type="button" role="tab" data-i18n="tawaf-counter.004">🏃 Sa'i</button>
+  </div>
+
+  <div class="counter-face">
+    <div class="counter-num" id="num">0</div>
+    <div class="counter-of" id="ofLabel" data-i18n="tawaf-counter.005">of 7 circuits</div>
+    <div class="pips" id="pips" aria-hidden="true"></div>
+    <div class="muted" id="where" style="font-size:.88rem;margin-top:8px" data-i18n="tawaf-counter.006">Tap below when you pass the Black Stone line</div>
+  </div>
+
+  <button class="tap-btn" id="tap" type="button">
+    <span id="tapLabel" data-i18n="tawaf-counter.007">Count circuit</span>
+    <small id="tapSub" data-i18n="tawaf-counter.008">Tap anywhere on this button</small>
+  </button>
+
+  <div class="btn-row two" style="margin-top:12px">
+    <button class="btn ghost" id="undo" type="button" data-i18n="tawaf-counter.009">↩︎ Undo</button>
+    <button class="btn ghost" id="reset" type="button" data-i18n="tawaf-counter.010">Reset</button>
+  </div>
+
+  <div class="card" style="margin-top:18px">
+    <label class="fld" style="margin-bottom:0;display:flex;align-items:center;gap:12px;justify-content:space-between">
+      <span style="margin:0" data-i18n="tawaf-counter.011">Keep the screen awake while counting</span>
+      <input type="checkbox" id="wakeToggle" style="width:24px;height:24px;min-height:0;flex:0 0 24px;accent-color:#136148">
+    </label>
+    <p class="hint" id="wakeHint" style="margin-top:8px" data-i18n="tawaf-counter.012">Stops your phone locking mid-Tawaf. Supported on most modern phones.</p>
+  </div>
+
+  <div class="ad-slot inline" data-hint="Discreet placement — nothing intrusive during worship"></div>
+
+  <section class="section">
+    <h2><span class="ic" data-i18n="tawaf-counter.013">ℹ️</span> <span data-i18n="tawaf-counter.x001">How to count correctly</span></h2>
+    <details class="acc">
+      <summary data-i18n="tawaf-counter.014">Tawaf — what counts as one circuit</summary>
+      <div class="acc-body">
+        <p style="margin:0 0 8px;font-size:.92rem" data-i18n="tawaf-counter.015">One circuit starts at the Black Stone line and ends when you return to it, having kept the Kaaba on your left the whole way round.</p>
+        <ul class="ticks" style="margin:0">
+          <li data-i18n="tawaf-counter.016">Tap once each time you pass the line — so the counter reads 1 after your first full circuit.</li>
+          <li data-i18n="tawaf-counter.017">Your route must pass <em>outside</em> the Hateem wall. If the crowd pushed you through it, that circuit doesn't count — undo it and redo.</li>
+          <li data-i18n="tawaf-counter.018">Seven circuits, then two rak'ah near Maqam Ibrahim.</li>
+        </ul>
+      </div>
+    </details>
+    <details class="acc">
+      <summary data-i18n="tawaf-counter.019">Sa'i — the one people get wrong</summary>
+      <div class="acc-body">
+        <p style="margin:0 0 8px;font-size:.92rem" data-i18n="tawaf-counter.m001">Each single length counts as one. Safa to Marwah is <b>one</b>, not half.</p>
+        <ul class="ticks" style="margin:0">
+          <li data-i18n="tawaf-counter.021">Start at Safa. Tap each time you arrive at the other end.</li>
+          <li data-i18n="tawaf-counter.m002">Seven lengths means you <b>finish at Marwah</b>. If you end up back at Safa, you've done six or eight.</li>
+          <li data-i18n="tawaf-counter.023">The counter above tells you which end you should be at, so you can check yourself against it.</li>
+        </ul>
+      </div>
+    </details>
+    <details class="acc">
+      <summary data-i18n="tawaf-counter.024">If you lose count</summary>
+      <div class="acc-body">
+        <p style="margin:0;font-size:.92rem" data-i18n="tawaf-counter.025">Act on what you are certain of. If you genuinely don't know whether you're on four or five, take the lower number and do the extra circuit. An extra circuit is harmless; a missing one is not.</p>
+      </div>
+    </details>
+  </section>
+
+  <div class="disclaimer" data-i18n="tawaf-counter.026">
+    This counter is a convenience, not an authority. Keep your own awareness of where you are. Worship guidance on this site is general; verify details with a qualified scholar.
+  </div>
+
+</main>
+
+<script src="assets/app.js"></script>
+<script src="assets/i18n.js"></script>
+<script>
+(function () {
+  var MODES = {
+    tawaf: {
+      total: 7, unit: 'circuits',
+      tap: 'Count circuit',
+      sub: 'Tap when you pass the Black Stone line',
+      where: function (n) {
+        if (n === 0) return 'Start at the Black Stone, Kaaba on your left';
+        if (n >= 7) return 'Seven complete — now two rak\'ah at Maqam Ibrahim';
+        return 'Circuit ' + (n + 1) + ' in progress';
+      }
+    },
+    sai: {
+      total: 7, unit: 'lengths',
+      tap: 'Count length',
+      sub: 'Tap each time you reach the other end',
+      where: function (n) {
+        if (n === 0) return 'Begin at Safa, facing the Kaaba';
+        if (n >= 7) return 'Seven complete at Marwah — now Halq or Taqsir';
+        return (n % 2 === 1 ? 'You are at Marwah' : 'You are at Safa') +
+               ' · heading to ' + (n % 2 === 1 ? 'Safa' : 'Marwah');
+      }
+    }
+  };
+
+  var mode = MG.get('cmode', 'tawaf');
+  var counts = MG.get('counts', { tawaf: 0, sai: 0 });
+  if (typeof counts !== 'object' || counts === null) counts = { tawaf: 0, sai: 0 };
+
+  var elNum = document.getElementById('num'),
+      elOf = document.getElementById('ofLabel'),
+      elPips = document.getElementById('pips'),
+      elWhere = document.getElementById('where'),
+      elTapLabel = document.getElementById('tapLabel'),
+      elTapSub = document.getElementById('tapSub'),
+      btnTawaf = document.getElementById('modeTawaf'),
+      btnSai = document.getElementById('modeSai');
+
+  function render() {
+    var m = MODES[mode], n = counts[mode] || 0;
+    elNum.textContent = n;
+    elOf.textContent = 'of ' + m.total + ' ' + m.unit;
+    elWhere.textContent = m.where(n);
+    elTapLabel.textContent = n >= m.total ? 'Complete ✓' : m.tap;
+    elTapSub.textContent = n >= m.total ? 'Tap Reset to start again' : m.sub;
+    btnTawaf.classList.toggle('on', mode === 'tawaf');
+    btnSai.classList.toggle('on', mode === 'sai');
+
+    var html = '';
+    for (var i = 1; i <= m.total; i++) {
+      html += '<span class="pip' + (i <= n ? ' done' : '') + '">' + i + '</span>';
+    }
+    elPips.innerHTML = html;
+  }
+
+  function save() { MG.set('counts', counts); MG.set('cmode', mode); }
+
+  document.getElementById('tap').addEventListener('click', function () {
+    var m = MODES[mode];
+    if ((counts[mode] || 0) >= m.total) { MG.toast('Already complete — tap Reset'); return; }
+    counts[mode] = (counts[mode] || 0) + 1;
+    save(); render();
+    if (counts[mode] >= m.total) { MG.buzz([120, 80, 120, 80, 240]); MG.toast('Seven complete — may it be accepted'); }
+    else { MG.buzz(35); }
+  });
+
+  document.getElementById('undo').addEventListener('click', function () {
+    if (!counts[mode]) return;
+    counts[mode]--; save(); render(); MG.buzz(20);
+  });
+
+  document.getElementById('reset').addEventListener('click', function () {
+    if (!counts[mode] || confirm('Reset the ' + (mode === 'sai' ? "Sa'i" : 'Tawaf') + ' count to zero?')) {
+      counts[mode] = 0; save(); render();
+    }
+  });
+
+  btnTawaf.addEventListener('click', function () { mode = 'tawaf'; save(); render(); });
+  btnSai.addEventListener('click', function () { mode = 'sai'; save(); render(); });
+
+  /* Wake lock */
+  var wake = null, wt = document.getElementById('wakeToggle');
+  if (!('wakeLock' in navigator)) {
+    wt.disabled = true;
+    document.getElementById('wakeHint').textContent = 'Your browser doesn\'t support this — set your screen timeout to the maximum in phone settings instead.';
+  }
+  wt.addEventListener('change', function () {
+    if (wt.checked) {
+      navigator.wakeLock.request('screen').then(function (w) {
+        wake = w; MG.toast('Screen will stay on');
+        w.addEventListener('release', function () { wake = null; wt.checked = false; });
+      }).catch(function () { wt.checked = false; MG.toast('Could not keep the screen on'); });
+    } else if (wake) { wake.release(); wake = null; }
+  });
+  document.addEventListener('visibilitychange', function () {
+    if (document.visibilityState === 'visible' && wt.checked && !wake) {
+      navigator.wakeLock.request('screen').then(function (w) { wake = w; }).catch(function () {});
+    }
+  });
+
+  render();
+})();
+</script>
+
+
+</body></html>

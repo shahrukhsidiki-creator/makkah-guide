@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Prayer Times, Qibla &amp; Hijri Date — Calculated Offline | Makkah Guide</title>
+<meta name="description" content="Prayer times for Makkah, Madinah and your own location, calculated on your phone with no internet. Plus a Qibla compass and a Hijri to Gregorian date converter that work offline.">
+<meta name="theme-color" content="#0a3b2c">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="hdr-row">
+      <a class="brand" href="index.html">
+        <span class="mark" aria-hidden="true">🕋</span>
+        <span><b>Makkah Guide</b><small data-i18n="ui.brand_tag">Umrah &amp; travel companion</small></span>
+      </a>
+      <div class="hdr-actions">
+        <button class="icon-btn" id="langBtn" type="button" aria-label="Change language">EN</button>
+        <button class="icon-btn" id="themeBtn" type="button" aria-label="Toggle dark mode">🌙</button>
+      </div>
+    </div>
+    <div class="page-title">
+      <a class="back-link" href="index.html">← <span data-i18n="back">Back</span></a>
+      <h1 data-i18n="tools.001">Prayer times, Qibla &amp; Hijri</h1>
+      <p data-i18n="tools.002">All three are calculated on your device from astronomical formulae. No internet required.</p>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ===== Prayer times ===== -->
+  <section class="section" id="prayer">
+    <h2><span class="ic" data-i18n="tools.003">🕐</span> <span data-i18n="tools.x001">Prayer times</span></h2>
+
+    <div class="card">
+      <label class="fld">
+        <span data-i18n="tools.004">Location</span>
+        <select id="loc">
+          <optgroup label="Saudi Arabia">
+            <option value="makkah" data-i18n="tools.005">Makkah</option>
+            <option value="madinah" data-i18n="tools.006">Madinah</option>
+            <option value="jeddah" data-i18n="tools.007">Jeddah</option>
+            <option value="taif" data-i18n="tools.008">Taif</option>
+          </optgroup>
+          <optgroup label="Use my phone">
+            <option value="gps" data-i18n="tools.009">📍 My current location</option>
+          </optgroup>
+          <optgroup label="Home cities">
+            <option value="dubai" data-i18n="tools.010">Dubai</option>
+            <option value="abudhabi" data-i18n="tools.011">Abu Dhabi</option>
+            <option value="karachi" data-i18n="tools.012">Karachi</option>
+            <option value="lahore" data-i18n="tools.013">Lahore</option>
+            <option value="islamabad" data-i18n="tools.014">Islamabad</option>
+            <option value="delhi" data-i18n="tools.015">Delhi</option>
+            <option value="mumbai" data-i18n="tools.016">Mumbai</option>
+            <option value="hyderabad" data-i18n="tools.017">Hyderabad (India)</option>
+            <option value="dhaka" data-i18n="tools.018">Dhaka</option>
+            <option value="cairo" data-i18n="tools.019">Cairo</option>
+            <option value="istanbul" data-i18n="tools.020">Istanbul</option>
+            <option value="jakarta" data-i18n="tools.021">Jakarta</option>
+            <option value="kualalumpur" data-i18n="tools.022">Kuala Lumpur</option>
+            <option value="london" data-i18n="tools.023">London</option>
+            <option value="birmingham" data-i18n="tools.024">Birmingham</option>
+            <option value="newyork" data-i18n="tools.025">New York</option>
+            <option value="toronto" data-i18n="tools.026">Toronto</option>
+          </optgroup>
+        </select>
+      </label>
+
+      <div class="fld-2">
+        <label class="fld">
+          <span data-i18n="tools.027">Calculation method</span>
+          <select id="method"></select>
+        </label>
+        <label class="fld">
+          <span data-i18n="tools.028">Asr</span>
+          <select id="asr">
+            <option value="standard" data-i18n="tools.029">Standard (Shafi'i, Maliki, Hanbali)</option>
+            <option value="hanafi" data-i18n="tools.030">Hanafi</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="chips" style="margin-bottom:0">
+        <button class="chip" id="fmtBtn" type="button" data-i18n="tools.031">12-hour</button>
+        <button class="chip" id="todayBtn" type="button" data-i18n="tools.032">Today</button>
+        <button class="chip" id="prevBtn" type="button" aria-label="Previous day" data-i18n="tools.033">◀ Prev</button>
+        <button class="chip" id="nextBtn" type="button" aria-label="Next day" data-i18n="tools.034">Next ▶</button>
+      </div>
+    </div>
+
+    <div class="card tight">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:0 2px 10px;border-bottom:1px solid var(--border);margin-bottom:4px">
+        <b id="locName" data-i18n="tools.035">Makkah</b>
+        <span class="muted" style="font-size:.8rem" id="dateLabel"></span>
+      </div>
+      <div id="times"></div>
+    </div>
+
+    <div class="card accent" id="nextCard" style="display:none">
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="font-size:1.6rem" data-i18n="tools.036">⏳</span>
+        <div>
+          <div style="font-weight:700" id="nextName"></div>
+          <div class="muted" style="font-size:.85rem" id="nextIn"></div>
+        </div>
+      </div>
+    </div>
+
+    <p class="hint" data-i18n="tools.037">Calculated with standard astronomical formulae. Mosques in Makkah follow the Umm al-Qura timetable, which can differ by a minute or two. For jama'ah, always follow the mosque.</p>
+  </section>
+
+  <div class="ad-slot" data-hint="Prayer mats, ihram, travel accessories"></div>
+
+  <!-- ===== Qibla ===== -->
+  <section class="section" id="qibla">
+    <h2><span class="ic" data-i18n="tools.038">🧭</span> <span data-i18n="tools.x002">Qibla direction</span></h2>
+    <div class="card">
+      <div class="compass" id="compass">
+        <span class="lbl n" data-i18n="tools.039">N</span><span class="lbl s" data-i18n="tools.040">S</span><span class="lbl e" data-i18n="tools.041">E</span><span class="lbl w" data-i18n="tools.042">W</span>
+        <div class="needle" id="needle"><span class="arrow" data-i18n="tools.043">🕋</span></div>
+        <span class="deg" id="qDeg">—</span>
+      </div>
+      <p class="center muted" id="qStatus" style="font-size:.86rem" data-i18n="tools.044">Tap below to find the Qibla from where you are standing.</p>
+      <div class="btn-row">
+        <button class="btn" id="qBtn" type="button" data-i18n="tools.045">📍 Find Qibla from my location</button>
+        <button class="btn ghost" id="compassBtn" type="button" style="display:none" data-i18n="tools.046">Enable live compass</button>
+      </div>
+      <p class="hint" data-i18n="tools.047">Phone compasses are affected by metal, electronics and marble buildings. Inside the Haram, just follow the rows — everybody is already facing it.</p>
+    </div>
+  </section>
+
+  <!-- ===== Hijri ===== -->
+  <section class="section" id="hijri">
+    <h2><span class="ic" data-i18n="tools.048">🌙</span> <span data-i18n="tools.x003">Hijri date converter</span></h2>
+    <div class="card">
+      <div class="result-box">
+        <div class="big" id="hijToday">—</div>
+        <div class="sub" id="gregToday">—</div>
+      </div>
+
+      <label class="fld">
+        <span data-i18n="tools.049">Adjustment (the Umm al-Qura calendar is set by sighting, so a formula can be a day out)</span>
+        <select id="hAdj">
+          <option value="-2" data-i18n="tools.050">−2 days</option>
+          <option value="-1" data-i18n="tools.051">−1 day</option>
+          <option value="0" selected="" data-i18n="tools.052">No adjustment</option>
+          <option value="1" data-i18n="tools.053">+1 day</option>
+          <option value="2" data-i18n="tools.054">+2 days</option>
+        </select>
+      </label>
+
+      <hr class="sep">
+
+      <h3 data-i18n="tools.055">Gregorian → Hijri</h3>
+      <label class="fld">
+        <span data-i18n="tools.056">Pick a date</span>
+        <input type="date" id="g2hInput">
+      </label>
+      <div class="kv"><span data-i18n="tools.057">Hijri</span><b id="g2hOut">—</b></div>
+
+      <hr class="sep">
+
+      <h3 data-i18n="tools.058">Hijri → Gregorian</h3>
+      <div class="fld-2">
+        <label class="fld"><span data-i18n="tools.059">Day</span><input type="number" id="hD" min="1" max="30" value="1"></label>
+        <label class="fld"><span data-i18n="tools.060">Year (AH)</span><input type="number" id="hY" min="1" max="2000" value="1448"></label>
+      </div>
+      <label class="fld"><span data-i18n="tools.061">Month</span><select id="hM"></select></label>
+      <div class="kv"><span data-i18n="tools.062">Gregorian</span><b id="h2gOut">—</b></div>
+    </div>
+    <p class="hint" data-i18n="tools.063">Conversion uses the standard tabular Islamic calendar. Official Saudi dates are confirmed by moon sighting and may differ by a day — use the adjustment above to match what you see locally.</p>
+  </section>
+
+  <div class="disclaimer" data-i18n="tools.064">
+    These calculations are provided as a convenience and are not an official timetable. For prayer in congregation, follow the mosque. For any date with religious significance, follow the official announcement.
+  </div>
+
+</main>
+
+<script src="assets/islamic.js"></script>
+<script src="assets/app.js"></script>
+<script src="assets/i18n.js"></script>
+<script>
+(function () {
+  var CITIES = {
+    makkah:{n:'Makkah',lat:21.4225,lng:39.8262,tz:3,m:'makkah'},
+    madinah:{n:'Madinah',lat:24.4686,lng:39.6142,tz:3,m:'makkah'},
+    jeddah:{n:'Jeddah',lat:21.4858,lng:39.1925,tz:3,m:'makkah'},
+    taif:{n:'Taif',lat:21.2703,lng:40.4158,tz:3,m:'makkah'},
+    dubai:{n:'Dubai',lat:25.2048,lng:55.2708,tz:4,m:'dubai'},
+    abudhabi:{n:'Abu Dhabi',lat:24.4539,lng:54.3773,tz:4,m:'dubai'},
+    karachi:{n:'Karachi',lat:24.8607,lng:67.0011,tz:5,m:'karachi'},
+    lahore:{n:'Lahore',lat:31.5204,lng:74.3587,tz:5,m:'karachi'},
+    islamabad:{n:'Islamabad',lat:33.6844,lng:73.0479,tz:5,m:'karachi'},
+    delhi:{n:'Delhi',lat:28.6139,lng:77.2090,tz:5.5,m:'karachi'},
+    mumbai:{n:'Mumbai',lat:19.0760,lng:72.8777,tz:5.5,m:'karachi'},
+    hyderabad:{n:'Hyderabad',lat:17.3850,lng:78.4867,tz:5.5,m:'karachi'},
+    dhaka:{n:'Dhaka',lat:23.8103,lng:90.4125,tz:6,m:'karachi'},
+    cairo:{n:'Cairo',lat:30.0444,lng:31.2357,tz:2,m:'egypt'},
+    istanbul:{n:'Istanbul',lat:41.0082,lng:28.9784,tz:3,m:'mwl'},
+    jakarta:{n:'Jakarta',lat:-6.2088,lng:106.8456,tz:7,m:'mwl'},
+    kualalumpur:{n:'Kuala Lumpur',lat:3.1390,lng:101.6869,tz:8,m:'mwl'},
+    london:{n:'London',lat:51.5074,lng:-0.1278,tz:null,m:'mwl'},
+    birmingham:{n:'Birmingham',lat:52.4862,lng:-1.8904,tz:null,m:'mwl'},
+    newyork:{n:'New York',lat:40.7128,lng:-74.0060,tz:null,m:'isna'},
+    toronto:{n:'Toronto',lat:43.6532,lng:-79.3832,tz:null,m:'isna'}
+  };
+
+  var ROW_KEYS = [['fajr','prayer.fajr','🌄'],['sunrise','prayer.sunrise','🌅'],['dhuhr','prayer.dhuhr','☀️'],
+    ['asr','prayer.asr','🌤️'],['maghrib','prayer.maghrib','🌇'],['isha','prayer.isha','🌙'],
+    ['lastThird','prayer.lastthird','✨']];
+  var FALLBACK = {'prayer.fajr':'Fajr','prayer.sunrise':'Sunrise','prayer.dhuhr':'Dhuhr','prayer.asr':'Asr',
+    'prayer.maghrib':'Maghrib','prayer.isha':'Isha','prayer.lastthird':'Last third of night'};
+  function ROWS(){ return ROW_KEYS.map(function(r){
+    return [r[0], (window.I18N ? I18N.t(r[1], FALLBACK[r[1]]) : FALLBACK[r[1]]), r[2]]; }); }
+  var PRAYERS = ['fajr','sunrise','dhuhr','asr','maghrib','isha'];
+
+  var $ = function (id) { return document.getElementById(id); };
+  var use24 = MG.get('fmt24', false);
+  var offsetDays = 0;
+  var gps = null;
+
+  // populate methods
+  Object.keys(Islamic.METHODS).forEach(function (k) {
+    var o = document.createElement('option');
+    o.value = k; o.textContent = Islamic.METHODS[k].name;
+    $('method').appendChild(o);
+  });
+  // populate hijri months
+  Islamic.HIJRI_MONTHS.forEach(function (m, i) {
+    var o = document.createElement('option');
+    o.value = i + 1; o.textContent = (i + 1) + ' · ' + m + ' — ' + Islamic.HIJRI_MONTHS_AR[i];
+    $('hM').appendChild(o);
+  });
+
+  $('loc').value = MG.get('loc', 'makkah');
+  $('method').value = MG.get('method', 'makkah');
+  $('asr').value = MG.get('asrMode', 'standard');
+  $('hAdj').value = String(MG.get('hijriAdj', 0));
+
+  function tzFor(c) {
+    if (c.tz !== null && c.tz !== undefined) return c.tz;
+    return -new Date().getTimezoneOffset() / 60;    // device timezone
+  }
+
+  function baseDate(tz) {
+    var now = new Date();
+    // represent "now" as wall-clock time in the target timezone
+    var shifted = new Date(now.getTime() + (now.getTimezoneOffset() + tz * 60) * 60000);
+    shifted.setDate(shifted.getDate() + offsetDays);
+    return shifted;
+  }
+
+  function current() {
+    var key = $('loc').value;
+    if (key === 'gps') {
+      if (!gps) return null;
+      return { n: 'My location', lat: gps.lat, lng: gps.lng, tz: -new Date().getTimezoneOffset() / 60, m: $('method').value };
+    }
+    return CITIES[key];
+  }
+
+  function renderTimes() {
+    var c = current();
+    if (!c) return;
+    var tz = tzFor(c);
+    var d = baseDate(tz);
+    var t = Islamic.prayerTimes(d, c.lat, c.lng, tz, $('method').value, $('asr').value);
+
+    $('locName').textContent = c.n;
+    $('dateLabel').textContent = d.toLocaleDateString(undefined, { weekday:'short', day:'numeric', month:'short' }) +
+      (offsetDays === 0 ? '' : '');
+
+    var hours = null;
+    if (offsetDays === 0) {
+      var now = new Date();
+      var localNow = new Date(now.getTime() + (now.getTimezoneOffset() + tz * 60) * 60000);
+      hours = localNow.getHours() + localNow.getMinutes() / 60;
+    }
+    var nextKey = null;
+    if (hours !== null) {
+      for (var i = 0; i < PRAYERS.length; i++) {
+        if (t[PRAYERS[i]] > hours) { nextKey = PRAYERS[i]; break; }
+      }
+    }
+
+    $('times').innerHTML = ROWS().map(function (r) {
+      var isNext = (r[0] === nextKey);
+      return '<div class="prayer-row' + (isNext ? ' next' : '') + '">' +
+        '<span class="pic">' + r[2] + '</span>' +
+        '<span class="pname">' + r[1] + (isNext ? ' <span class="badge gold">' + (window.I18N ? I18N.t('prayer.next','next') : 'next') + '</span>' : '') + '</span>' +
+        '<span class="ptime">' + Islamic.fmt(t[r[0]], use24) + '</span></div>';
+    }).join('');
+
+    if (nextKey) {
+      var mins = Math.round((t[nextKey] - hours) * 60);
+      var h = Math.floor(mins / 60), m = mins % 60;
+      $('nextCard').style.display = '';
+      $('nextName').textContent = ROWS().filter(function (r) { return r[0] === nextKey; })[0][1] +
+        ' at ' + Islamic.fmt(t[nextKey], use24);
+      $('nextIn').textContent = 'in ' + (h ? h + ' hr ' : '') + m + ' min';
+    } else {
+      $('nextCard').style.display = 'none';
+    }
+  }
+
+  function renderHijri() {
+    var adj = parseInt($('hAdj').value, 10) || 0;
+    MG.set('hijriAdj', adj);
+    var now = new Date();
+    var h = Islamic.toHijri(now, adj);
+    $('hijToday').textContent = h.day + ' ' + h.monthName + ' ' + h.year;
+    $('gregToday').textContent = h.monthNameAr + ' · ' +
+      now.toLocaleDateString(undefined, { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+    g2h(); h2g();
+  }
+
+  function g2h() {
+    var v = $('g2hInput').value;
+    if (!v) { $('g2hOut').textContent = '—'; return; }
+    var parts = v.split('-');
+    var d = new Date(+parts[0], +parts[1] - 1, +parts[2]);
+    var h = Islamic.toHijri(d, parseInt($('hAdj').value, 10) || 0);
+    $('g2hOut').textContent = h.day + ' ' + h.monthName + ' ' + h.year + ' AH';
+  }
+
+  function h2g() {
+    var d = Islamic.fromHijri(+$('hY').value, +$('hM').value, +$('hD').value);
+    if (isNaN(d.getTime())) { $('h2gOut').textContent = '—'; return; }
+    var adj = parseInt($('hAdj').value, 10) || 0;
+    d.setDate(d.getDate() - adj);
+    $('h2gOut').textContent = d.toLocaleDateString(undefined, { weekday:'short', day:'numeric', month:'long', year:'numeric' });
+  }
+
+  /* ---- events ---- */
+  $('loc').addEventListener('change', function () {
+    MG.set('loc', this.value);
+    var c = CITIES[this.value];
+    if (c && c.m) { $('method').value = c.m; MG.set('method', c.m); }
+    if (this.value === 'gps' && !gps) {
+      $('locName').textContent = 'Locating…';
+      MG.locate(function (la, ln) { gps = { lat: la, lng: ln }; renderTimes(); },
+                function () { MG.toast('Location unavailable — pick a city'); $('loc').value = 'makkah'; renderTimes(); });
+      return;
+    }
+    offsetDays = 0; renderTimes();
+  });
+  $('method').addEventListener('change', function () { MG.set('method', this.value); renderTimes(); });
+  $('asr').addEventListener('change', function () { MG.set('asrMode', this.value); renderTimes(); });
+  $('fmtBtn').addEventListener('click', function () {
+    use24 = !use24; MG.set('fmt24', use24);
+    this.textContent = use24 ? '24-hour' : '12-hour';
+    renderTimes();
+  });
+  $('fmtBtn').textContent = use24 ? '24-hour' : '12-hour';
+  $('todayBtn').addEventListener('click', function () { offsetDays = 0; renderTimes(); });
+  $('prevBtn').addEventListener('click', function () { offsetDays--; renderTimes(); });
+  $('nextBtn').addEventListener('click', function () { offsetDays++; renderTimes(); });
+  $('hAdj').addEventListener('change', renderHijri);
+  $('g2hInput').addEventListener('change', g2h);
+  ['hD','hM','hY'].forEach(function (id) { $(id).addEventListener('input', h2g); });
+
+  /* ---- qibla ---- */
+  var qibla = null, heading = null;
+  function paintQibla() {
+    if (qibla === null) return;
+    $('qDeg').textContent = Math.round(qibla) + '° from North';
+    var rot = (heading === null) ? qibla : (qibla - heading);
+    $('needle').style.transform = 'rotate(' + rot + 'deg)';
+  }
+  $('qBtn').addEventListener('click', function () {
+    $('qStatus').textContent = 'Getting your location…';
+    MG.locate(function (la, ln) {
+      qibla = Islamic.qiblaBearing(la, ln);
+      var km = Math.round(Islamic.greatCircleKm(la, ln, MG_KAABA.lat, MG_KAABA.lng));
+      $('qStatus').innerHTML = 'Qibla is <b>' + Math.round(qibla) + '°</b> from true north · the Kaaba is about <b>' +
+        km.toLocaleString() + ' km</b> away.';
+      paintQibla();
+      if (window.DeviceOrientationEvent) $('compassBtn').style.display = '';
+    }, function (why) {
+      $('qStatus').textContent = why === 'denied'
+        ? 'Location permission was declined. Allow it in your browser settings, or use a physical compass set to the bearing shown on a map.'
+        : 'Could not get your location. Try again outdoors.';
+    });
+  });
+
+  function startCompass() {
+    window.addEventListener('deviceorientationabsolute', onOrient, true);
+    window.addEventListener('deviceorientation', onOrient, true);
+    $('compassBtn').style.display = 'none';
+  }
+  function onOrient(e) {
+    var h = null;
+    if (typeof e.webkitCompassHeading === 'number') h = e.webkitCompassHeading;
+    else if (e.absolute && typeof e.alpha === 'number') h = 360 - e.alpha;
+    if (h === null) return;
+    heading = h; paintQibla();
+  }
+  $('compassBtn').addEventListener('click', function () {
+    if (typeof DeviceOrientationEvent !== 'undefined' &&
+        typeof DeviceOrientationEvent.requestPermission === 'function') {
+      DeviceOrientationEvent.requestPermission().then(function (r) {
+        if (r === 'granted') startCompass(); else MG.toast('Compass permission declined');
+      }).catch(function () { MG.toast('Compass not available'); });
+    } else { startCompass(); }
+  });
+
+  /* ---- init ---- */
+  var today = new Date();
+  $('g2hInput').value = today.getFullYear() + '-' +
+    String(today.getMonth() + 1).padStart(2, '0') + '-' + String(today.getDate()).padStart(2, '0');
+  var ht = Islamic.toHijri(today, 0);
+  $('hY').value = ht.year; $('hM').value = ht.month; $('hD').value = ht.day;
+
+  renderTimes();
+  renderHijri();
+  document.addEventListener('i18n:change', function () { renderTimes(); renderHijri(); });
+  setInterval(function () { if (offsetDays === 0) renderTimes(); }, 60000);
+
+  if (location.hash === '#qibla') setTimeout(function () { $('qBtn').scrollIntoView({ block: 'center' }); }, 200);
+})();
+</script>
+
+
+</body></html>

@@ -1,0 +1,6 @@
+# Robots — Makkah Guide
+
+User-agent: *
+Allow: /
+
+Sitemap: https://makkah-guide.netlify.app/sitemap.xml

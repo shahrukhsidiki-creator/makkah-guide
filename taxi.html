@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Makkah Taxi Fare Calculator — Estimate Before You Agree a Price | Makkah Guide</title>
+<meta name="description" content="Estimate taxi fares in Makkah before you negotiate. Preset routes to Jeddah airport, Madinah, Taif, Cave Hira, Masjid Aisha and the Haramain station, with night and peak surcharges, plus Uber and Careem links.">
+<meta name="theme-color" content="#0a3b2c">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="hdr-row">
+      <a class="brand" href="index.html">
+        <span class="mark" aria-hidden="true">🕋</span>
+        <span><b>Makkah Guide</b><small data-i18n="ui.brand_tag">Umrah &amp; travel companion</small></span>
+      </a>
+      <div class="hdr-actions">
+        <button class="icon-btn" id="langBtn" type="button" aria-label="Change language">EN</button>
+        <button class="icon-btn" id="themeBtn" type="button" aria-label="Toggle dark mode">🌙</button>
+      </div>
+    </div>
+    <div class="page-title">
+      <a class="back-link" href="travel.html" data-i18n="taxi.001">← Travel</a>
+      <h1 data-i18n="taxi.002">Taxi fare calculator</h1>
+      <p data-i18n="taxi.003">Know roughly what it should cost <em>before</em> you open the door.</p>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="notice warn">
+    <b data-i18n="taxi.004">How to use this</b> <span data-i18n="taxi.x001">Most taxis in Makkah are negotiated, not metered. Work out the estimate here first, then open with a number near the low end and settle somewhere in the middle. Walking away is always an option — there is another taxi thirty seconds behind.</span> </div>
+
+  <div class="card">
+    <label class="fld">
+      <span data-i18n="taxi.005">Where are you going?</span>
+      <select id="route"></select>
+    </label>
+
+    <div class="fld-2" id="customWrap" style="display:none">
+      <label class="fld"><span data-i18n="taxi.006">Distance (km)</span><input type="number" id="km" min="1" step="1" value="10"></label>
+      <label class="fld"><span data-i18n="taxi.007">Journey time (min)</span><input type="number" id="mins" min="1" step="1" value="20"></label>
+    </div>
+
+    <div class="chips">
+      <button class="chip" id="nightBtn" type="button" title="Night rate, roughly 11pm to 6am" data-i18n="taxi.008">🌙 Night</button>
+      <button class="chip" id="peakBtn" type="button" title="Peak time, or just after a congregational prayer" data-i18n="taxi.009">🚦 Peak</button>
+      <button class="chip" id="luggageBtn" type="button" title="Heavy or multiple bags" data-i18n="taxi.010">🧳 Luggage</button>
+    </div>
+
+    <div class="result-box">
+      <div class="big" id="estimate">—</div>
+      <div class="sub" id="estSub" data-i18n="taxi.011">Expected range for this trip</div>
+    </div>
+
+    <div class="kv"><span data-i18n="taxi.012">Distance</span><b id="outKm">—</b></div>
+    <div class="kv"><span data-i18n="taxi.013">Approximate time</span><b id="outMin">—</b></div>
+    <div class="kv"><span data-i18n="taxi.014">Open your offer at</span><b id="outOpen">—</b></div>
+    <div class="kv"><span data-i18n="taxi.015">Walk away above</span><b id="outWalk">—</b></div>
+    <div class="kv" id="usdRow"><span data-i18n="taxi.016">Roughly</span><b id="outUsd">—</b></div>
+
+    <div class="btn-row two" style="margin-top:14px">
+      <button class="btn ghost sm" id="mapBtn" type="button"><span data-i18n="taxi.x002">See route on map</span> <span class="ext" data-i18n="taxi.017">↗</span></button>
+      <button class="btn ghost sm" id="compareBtn" type="button"><span data-i18n="taxi.x003">Check ride apps</span> <span class="ext" data-i18n="taxi.018">↗</span></button>
+    </div>
+  </div>
+
+  <details class="acc">
+    <summary data-i18n="taxi.019">⚙️ Adjust the rates used</summary>
+    <div class="acc-body">
+      <p class="hint" style="margin-top:0" data-i18n="taxi.020">Fares drift over time and vary by vehicle. If you find the estimates consistently off, tune them here — your changes are saved on this device. The per-km rate tapers automatically over longer distances, so a long intercity run isn't priced at the city rate.</p>
+      <div class="fld-2">
+        <label class="fld"><span data-i18n="taxi.021">Starting fare (SAR)</span><input type="number" id="rBase" step="0.5" value="6"></label>
+        <label class="fld"><span data-i18n="taxi.022">Minimum fare (SAR)</span><input type="number" id="rMin" step="1" value="12"></label>
+      </div>
+      <div class="fld-2">
+        <label class="fld"><span data-i18n="taxi.023">Per km, first 15 km (SAR)</span><input type="number" id="rKm" step="0.1" value="1.9"></label>
+        <label class="fld"><span data-i18n="taxi.024">Per minute (SAR)</span><input type="number" id="rMinute" step="0.1" value="0.4"></label>
+      </div>
+      <label class="fld"><span data-i18n="taxi.025">SAR per 1 USD (for the rough conversion)</span><input type="number" id="rUsd" step="0.01" value="3.75"></label>
+      <button class="btn ghost sm" id="resetRates" type="button" data-i18n="taxi.026">Reset to defaults</button>
+    </div>
+  </details>
+
+  <div class="ad-slot" data-hint="Transport companies, private car hire, ziyarat tours"></div>
+
+  <section class="section">
+    <h2><span class="ic" data-i18n="taxi.027">🤝</span> <span data-i18n="taxi.x004">Negotiating, honestly</span></h2>
+    <div class="card">
+      <ul class="ticks">
+        <li data-i18n="taxi.m001"><b>Agree the price before you get in.</b> Not after loading the bags, not at the junction. Before.</li>
+        <li data-i18n="taxi.m002"><b>Say the total, for everyone, to the final door.</b> "Hundred riyal, all of us, to the hotel door" — in that form. Vague agreements become per-person agreements on arrival.</li>
+        <li data-i18n="taxi.m003"><b>Check the ride app first even if you then take a street taxi.</b> The app price tells you the real market rate for that moment, which is the single most useful piece of information in the negotiation.</li>
+        <li data-i18n="taxi.m004"><b>Carry small notes.</b> "No change" is the oldest move there is.</li>
+        <li data-i18n="taxi.m005"><b>Share with other pilgrims.</b> At the airport and outside the Haram, groups going the same way split a car constantly. Just ask.</li>
+        <li data-i18n="taxi.m006"><b>Expect surge after prayers.</b> The twenty minutes after a congregational prayer is the worst time to need a taxi anywhere near the Haram. Walk five minutes out and the price drops.</li>
+        <li data-i18n="taxi.m007"><b>Airport arrivals:</b> ignore the drivers who approach you inside the terminal. Walk out to the official rank or open a ride app.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2><span class="ic" data-i18n="taxi.035">📱</span> <span data-i18n="taxi.x012">Ride apps</span></h2>
+    <div class="grid c2">
+      <div class="card">
+        <h3 data-i18n="taxi.036">Uber</h3>
+        <p style="font-size:.88rem" data-i18n="taxi.037">Widely used in Makkah and Jeddah. Price shown upfront, pay by card or cash.</p>
+        <button class="btn sm ghost" type="button" onclick="MG.go('https://m.uber.com/looking')"><span data-i18n="taxi.x013">Open Uber</span> <span class="ext" data-i18n="taxi.038">↗</span></button>
+      </div>
+      <div class="card">
+        <h3 data-i18n="taxi.039">Careem</h3>
+        <p style="font-size:.88rem" data-i18n="taxi.040">The regional app; often has more cars near the Haram and sometimes cheaper on short hops.</p>
+        <button class="btn sm ghost" type="button" onclick="MG.go('https://www.careem.com/')"><span data-i18n="taxi.x014">Open Careem</span> <span class="ext" data-i18n="taxi.041">↗</span></button>
+      </div>
+    </div>
+    <p class="hint" data-i18n="taxi.042">Around the Haram, GPS struggles among the towers and drivers often can't reach the pickup pin. Agree a landmark — a named hotel entrance or a specific gate — rather than trusting the map pin.</p>
+  </section>
+
+  <div class="disclaimer">
+    <b data-i18n="taxi.043">These are estimates, not quoted prices.</b> <span data-i18n="taxi.x015">This site is not a taxi operator and cannot book or guarantee anything. Actual fares depend on the driver, the vehicle, traffic, the season and your negotiation. Distances are approximate road distances. Always confirm the price before travelling.</span> </div>
+
+</main>
+
+<script src="assets/app.js"></script>
+<script src="assets/i18n.js"></script>
+<script>
+(function () {
+  var ROUTES = [
+    ['custom', 'Somewhere else — enter it myself', 0, 0, ''],
+    ['h-jedapt', 'Haram → Jeddah Airport (JED)', 92, 75, 'Jeddah King Abdulaziz International Airport'],
+    ['h-jedcity','Haram → Jeddah city centre', 85, 70, 'Jeddah Corniche'],
+    ['h-medinah','Haram → Madinah (by road)', 450, 300, 'Al Masjid an Nabawi Madinah'],
+    ['h-taif',   'Haram → Taif', 90, 85, 'Taif Saudi Arabia'],
+    ['h-hrmstn', 'Haram → Makkah Haramain train station', 6, 15, 'Makkah Haramain High Speed Railway Station'],
+    ['h-jedstn', 'Haram → Jeddah Sulaymaniyah station', 80, 65, 'Jeddah Sulaymaniyah Haramain Station'],
+    ['h-hira',   'Haram → Jabal al-Nour (Cave Hira)', 7, 20, 'Jabal al-Nour Makkah'],
+    ['h-thawr',  'Haram → Jabal Thawr', 6, 18, 'Jabal Thawr Makkah'],
+    ['h-aisha',  'Haram → Masjid Aisha (Taneem)', 8, 20, 'Masjid Aisha Taneem Makkah'],
+    ['h-mualla', 'Haram → Jannat al-Mu\'alla', 3, 12, 'Jannat al-Mualla Makkah'],
+    ['h-jinn',   'Haram → Masjid al-Jinn', 2, 10, 'Masjid al-Jinn Makkah'],
+    ['h-mina',   'Haram → Mina', 8, 20, 'Mina Makkah'],
+    ['h-arafat', 'Haram → Arafat', 22, 35, 'Mount Arafat Makkah'],
+    ['h-hudayb', 'Haram → Hudaybiyyah', 24, 30, 'Hudaybiyyah Mosque Makkah'],
+    ['h-kudai',  'Haram → Kudai (dates market area)', 3, 12, 'Kudai Makkah'],
+    ['h-hotel',  'Haram → hotel in Aziziyah', 8, 22, 'Aziziyah Makkah']
+  ];
+
+  var DEFAULTS = { base: 5, min: 12, km: 1.9, minute: 0.4, usd: 3.75 };
+
+  /* Fares do not scale linearly with distance. A 7 km hop across Makkah is
+     priced very differently per kilometre from a 450 km run to Madinah, so
+     the rate tapers through bands. The per-km rate set below is the band-1
+     rate; the later bands scale from it.                                   */
+  var BANDS = [[15, 1.00], [45, 0.84], [90, 0.68], [Infinity, 0.53]];
+  var TIME_CAP_MIN = 60;      // beyond an hour, time stops adding to a negotiated price
+  var LONG_TRIP_KM = 60;
+  var $ = function (id) { return document.getElementById(id); };
+  var flags = { night: false, peak: false, luggage: false };
+
+  var sel = $('route');
+  sel.innerHTML = ROUTES.map(function (r) {
+    return '<option value="' + r[0] + '">' + r[1] + '</option>';
+  }).join('');
+  sel.value = 'h-jedapt';
+
+  function rates() {
+    return {
+      base: parseFloat($('rBase').value) || DEFAULTS.base,
+      min: parseFloat($('rMin').value) || DEFAULTS.min,
+      km: parseFloat($('rKm').value) || DEFAULTS.km,
+      minute: parseFloat($('rMinute').value) || DEFAULTS.minute,
+      usd: parseFloat($('rUsd').value) || DEFAULTS.usd
+    };
+  }
+
+  function route() {
+    var key = sel.value;
+    for (var i = 0; i < ROUTES.length; i++) if (ROUTES[i][0] === key) return ROUTES[i];
+    return ROUTES[0];
+  }
+
+  function calc() {
+    var r = route(), rt = rates();
+    var km, mins, dest;
+    if (r[0] === 'custom') {
+      km = parseFloat($('km').value) || 0;
+      mins = parseFloat($('mins').value) || 0;
+      dest = '';
+    } else {
+      km = r[2]; mins = r[3]; dest = r[4];
+    }
+
+    // distance component, tapered through the bands
+    var dist = 0, left = km;
+    for (var b = 0; b < BANDS.length && left > 0; b++) {
+      var span = Math.min(left, BANDS[b][0]);
+      dist += span * rt.km * BANDS[b][1];
+      left -= span;
+    }
+    var fare = rt.base + dist + Math.min(mins, TIME_CAP_MIN) * rt.minute;
+    if (fare < rt.min) fare = rt.min;
+
+    var mult = 1;
+    if (flags.night) mult += 0.25;
+    if (flags.peak) mult += 0.30;
+    fare *= mult;
+    if (flags.luggage) fare += 10;
+
+    // Street taxis run above a pure metered calculation, and the spread is
+    // wider on short hops than on long pre-negotiated runs.
+    var lo = km >= LONG_TRIP_KM ? 1.2 : 1.1;
+    var hi = km >= LONG_TRIP_KM ? 1.8 : 1.9;
+    var round = km >= LONG_TRIP_KM ? 10 : 5;
+    var low = Math.round(fare * lo / round) * round;
+    var high = Math.round(fare * hi / round) * round;
+    if (high <= low) high = low + round;
+
+    $('estimate').textContent = 'SAR ' + low + ' – ' + high;
+    $('outKm').textContent = km ? km + ' km' : '—';
+    $('outMin').textContent = mins ? (mins >= 60 ? Math.floor(mins / 60) + ' hr ' + (mins % 60) + ' min' : mins + ' min') : '—';
+    $('outOpen').textContent = 'SAR ' + Math.round(low * 0.8 / 5) * 5;
+    $('outWalk').textContent = 'SAR ' + Math.round(high * 1.25 / 5) * 5;
+    $('outUsd').textContent = '≈ $' + Math.round(low / rt.usd) + ' – $' + Math.round(high / rt.usd);
+
+    var sub = [];
+    if (flags.night) sub.push('night rate');
+    if (flags.peak) sub.push('peak');
+    if (flags.luggage) sub.push('luggage');
+    $('estSub').textContent = sub.length
+      ? 'Including ' + sub.join(', ') + ' — negotiated street taxi'
+      : 'Typical negotiated street-taxi range';
+
+    $('mapBtn').onclick = function () {
+      if (dest) MG.directions('Masjid al-Haram Makkah', dest, 'driving');
+      else MG.maps('Masjid al-Haram Makkah');
+    };
+    $('compareBtn').onclick = function () {
+      MG.google((dest ? 'Uber Careem price Makkah to ' + dest : 'Uber Careem fare Makkah') + ' today');
+    };
+  }
+
+  sel.addEventListener('change', function () {
+    $('customWrap').style.display = (this.value === 'custom') ? '' : 'none';
+    calc();
+  });
+  ['km','mins','rBase','rMin','rKm','rMinute','rUsd'].forEach(function (id) {
+    $(id).addEventListener('input', function () { saveRates(); calc(); });
+  });
+
+  function toggle(btn, key) {
+    $(btn).addEventListener('click', function () {
+      flags[key] = !flags[key];
+      this.classList.toggle('on', flags[key]);
+      calc();
+    });
+  }
+  toggle('nightBtn', 'night');
+  toggle('peakBtn', 'peak');
+  toggle('luggageBtn', 'luggage');
+
+  function saveRates() { MG.set('taxiRates', rates()); }
+  var saved = MG.get('taxiRates', null);
+  if (saved) {
+    $('rBase').value = saved.base; $('rMin').value = saved.min;
+    $('rKm').value = saved.km; $('rMinute').value = saved.minute; $('rUsd').value = saved.usd;
+  }
+  $('resetRates').addEventListener('click', function () {
+    $('rBase').value = DEFAULTS.base; $('rMin').value = DEFAULTS.min;
+    $('rKm').value = DEFAULTS.km; $('rMinute').value = DEFAULTS.minute; $('rUsd').value = DEFAULTS.usd;
+    saveRates(); calc(); MG.toast('Rates reset');
+  });
+
+  calc();
+})();
+</script>
+
+
+</body></html>

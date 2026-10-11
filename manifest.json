@@ -1,0 +1,25 @@
+{
+  "name": "Makkah Guide — Umrah & Travel Companion",
+  "short_name": "Makkah Guide",
+  "description": "Complete Umrah guidance, Makkah travel, transport, food and offline worship tools.",
+  "start_url": "index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f6f1e6",
+  "theme_color": "#0a3b2c",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["travel", "lifestyle", "navigation"],
+  "icons": [
+    { "src": "assets/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "assets/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "assets/icon-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "assets/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ],
+  "shortcuts": [
+    { "name": "Tawaf Counter", "url": "tawaf-counter.html", "description": "Count your 7 circuits" },
+    { "name": "Prayer Times", "url": "tools.html", "description": "Offline prayer times and Qibla" },
+    { "name": "Umrah Steps", "url": "umrah-guide.html", "description": "Step by step Umrah guide" }
+  ]
+}
